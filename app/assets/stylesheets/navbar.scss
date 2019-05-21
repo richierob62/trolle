@@ -1,0 +1,24 @@
+.navbar {
+  // background: rgba(0, 121, 191, 0);
+  background: #0079bf;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+
+  .logged_out_btns {
+    .login {
+      color: white;
+      margin-right: 6px;
+    }
+    .signup {
+      font-weight: 500px;
+      background: white;
+    }
+  }
+}
