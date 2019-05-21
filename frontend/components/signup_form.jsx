@@ -1,43 +1,17 @@
-import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { signup } from '../actions/session_actions'
+import LoginSignupForm from './login_signup_form'
 
-const mstp = state => ({})
+const mstp = state => ({
+  session_errors: state.errors.session,
+  formType: 'signup'
+})
 
-const mdtp = dispatch => ({})
-
-class SignUp extends React.Component {
-  render() {
-    return (
-      <div className="login-form">
-        <div className="contents-wrapper">
-          <h1>Create a Trolle Account</h1>
-          <Link className="create-link" to="/login">
-            or sign in to your account
-          </Link>
-          <form>
-            <fieldset>
-              <label>Name</label>
-              <input type="text" placeholder="e.g., Harry Houdini" />
-            </fieldset>
-            <fieldset>
-              <label>Email</label>
-              <input type="text" placeholder="e.g., harry@gcloud.ai" />
-            </fieldset>
-            <fieldset>
-              <label>Password</label>
-              <input type="password" />
-            </fieldset>
-
-            <button>Create New Account</button>
-          </form>
-        </div>
-      </div>
-    )
-  }
-}
+const mdtp = dispatch => ({
+  action: newUser => dispatch(signup(newUser))
+})
 
 export default connect(
   mstp,
   mdtp
-)(SignUp)
+)(LoginSignupForm)

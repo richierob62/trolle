@@ -5,13 +5,13 @@ import SplashPage from './splash_page'
 import Navbar from './navbar'
 
 const mstp = state => ({
-  is_logged_in: !!state.session.id
+  isLoggedIn: !!state.session.id
 })
 
-const hs = ({ is_logged_in }) => (
+const hs = ({ isLoggedIn }) => (
   <div>
     <Navbar />
-    <div className="main">{is_logged_in ? <HomePage /> : <SplashPage />}</div>
+    <div className="main">{isLoggedIn ? <HomePage /> : <SplashPage />}</div>
   </div>
 )
 
