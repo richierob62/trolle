@@ -317,10 +317,10 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Log in to Trolle"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         className: "create-link",
         to: "/signup"
-      }, "or create an account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Email ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "(or username)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "or create an account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Email ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "(or username)")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: "e.g., harry@gcloud.ai"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Password", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Log In"))));
     }

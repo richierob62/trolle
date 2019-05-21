@@ -12,16 +12,20 @@ class Login extends React.Component {
       <div className="login-form">
         <div className="contents-wrapper">
           <h1>Log in to Trolle</h1>
-          <Link className="create-link" to="/signup">or create an account</Link>
+          <Link className="create-link" to="/signup">
+            or create an account
+          </Link>
           <form>
-            <label>
-              Email <span>(or username)</span>
+            <fieldset>
+              <label>
+                Email <span>(or username)</span>
+              </label>
               <input type="text" placeholder="e.g., harry@gcloud.ai" />
-            </label>
-            <label>
-              Password
+            </fieldset>
+            <fieldset>
+              <label>Password</label>
               <input type="password" />
-            </label>
+            </fieldset>
 
             <button>Log In</button>
           </form>
