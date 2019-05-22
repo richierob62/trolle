@@ -435,10 +435,8 @@ function (_React$Component) {
           password: password
         };
         this.props.clearErrors();
-        this.props.action(user).then(function (user) {
-          if (user && user.id) {
-            _this2.props.history.push('/');
-          }
+        this.props.action(user).then(function (u) {
+          return _this2.props.history.push('/');
         });
       }
     }
