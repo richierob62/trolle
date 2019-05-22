@@ -33,6 +33,7 @@ class LoginSignupForm extends React.Component {
         email,
         password
       }
+      this.props.clearErrors()
       this.props.action(user).then(user => {
         if (user && user.id) {
           this.props.history.push('/')
