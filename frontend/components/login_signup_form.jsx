@@ -60,6 +60,7 @@ class LoginSignupForm extends React.Component {
     const altText = isLogin
       ? 'or create an account'
       : 'or sign in to your account'
+    const altURL = isLogin ? '/signup' : '/login'
     const buttonText = isLogin ? 'Log In' : 'Create New Account'
 
     return (
@@ -67,8 +68,9 @@ class LoginSignupForm extends React.Component {
         <div className="contents-wrapper">
           {errors.length > 0 && <ErrorBlock errors={errors} />}
           <h1>{headingText}</h1>
-          <Link className="create-link" to="/login" />
-          {altText}
+          <Link className="create-link" to={altURL}>
+            {altText}
+          </Link>
           <form onSubmit={this.handleSubmit}>
             {!isLogin && (
               <fieldset>
