@@ -1,0 +1,27 @@
+.icon {
+  padding: 7px;
+  margin: 2px;
+  background: #ffffff54;
+  cursor: pointer;
+
+  .icon-home {
+    background-image: image_url('home.png');
+    background-size: cover;
+    width: 16px;
+    height: 16px;
+  }
+
+  .icon-board {
+    background-image: image_url('logo-sm.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 16px;
+    font-family: 'Roboto';
+    color: white;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    padding-left: 23px;
+    font-weight: 900;
+  }
+}

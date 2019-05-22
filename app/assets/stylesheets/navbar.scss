@@ -1,5 +1,4 @@
 .navbar {
-  // background: rgba(0, 121, 191, 0);
   background: #0079bf;
   position: fixed;
   top: 0;
@@ -19,6 +18,18 @@
     .signup {
       font-weight: 500px;
       background: white;
+    }
+  }
+
+  &.navbar-loggedin {
+    padding: 6px;
+    display: flex;
+
+    svg {
+      flex: 1;
+      height: 28px;
+      width: auto;
+      opacity: 0.5;
     }
   }
 }
