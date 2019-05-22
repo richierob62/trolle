@@ -41,5 +41,19 @@ export const login = user => dispatch =>
     err => dispatch(receiveErrors(err.responseJSON))
   )
 
+export const loginAsHarry = () => dispatch => {
+  const user = {
+    email: 'harry@gcloud.ai',
+    password: 'harryhoudini'
+  }
+  return APIUtil.login(user).then(
+    user => {
+      dispatch(receiveCurrentUser(user))
+      return user
+    },
+    err => dispatch(receiveErrors(err.responseJSON))
+  )
+}
+
 export const logout = () => dispatch =>
   APIUtil.logout().then(user => dispatch(logoutCurrentUser()))

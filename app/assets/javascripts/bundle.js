@@ -90,7 +90,7 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_SESSION_ERRORS, CLEAR_SESSION_ERRORS, receiveCurrentUser, logoutCurrentUser, receiveErrors, clearSessionErrors, signup, login, logout */
+/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_SESSION_ERRORS, CLEAR_SESSION_ERRORS, receiveCurrentUser, logoutCurrentUser, receiveErrors, clearSessionErrors, signup, login, loginAsHarry, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105,6 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearSessionErrors", function() { return clearSessionErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginAsHarry", function() { return loginAsHarry; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/session_api_util */ "./frontend/util/session_api_util.js");
 
@@ -146,6 +147,20 @@ var signup = function signup(user) {
 };
 var login = function login(user) {
   return function (dispatch) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (user) {
+      dispatch(receiveCurrentUser(user));
+      return user;
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+var loginAsHarry = function loginAsHarry() {
+  return function (dispatch) {
+    var user = {
+      email: 'harry@gcloud.ai',
+      password: 'harryhoudini'
+    };
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (user) {
       dispatch(receiveCurrentUser(user));
       return user;
@@ -613,6 +628,110 @@ var mdtp = function mdtp(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/splash_carousel.jsx":
+/*!*************************************************!*\
+  !*** ./frontend/components/splash_carousel.jsx ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Carousel =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Carousel, _React$Component);
+
+  function Carousel(props) {
+    var _this;
+
+    _classCallCheck(this, Carousel);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Carousel).call(this, props));
+    _this.picsArray = [window.splash_image_4, window.splash_image_5, window.splash_image_6, window.splash_image_7, window.splash_image_8];
+    _this.state = {
+      pic_num: 0
+    };
+    return _this;
+  }
+
+  _createClass(Carousel, [{
+    key: "moveLeft",
+    value: function moveLeft() {
+      this.setState({
+        pic_num: (this.state.pic_num - 1 + 5) % 5
+      });
+    }
+  }, {
+    key: "moveRight",
+    value: function moveRight() {
+      this.setState({
+        pic_num: (this.state.pic_num + 1) % 5
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "carousel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "carousel-btn carousel-btn-left",
+        onClick: this.moveLeft.bind(this)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+        height: "40",
+        viewBox: "0 0 22 40",
+        width: "22"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+        d: "m4.31783602 20 16.88192488 16.8819248c.7133028.7133029.7133028 1.8697953 0 2.5830981-.7133029.7133028-1.8697953.7133028-2.5830981 0l-18.08168628-18.0816863c-.38000317-.3800032-.5575644-.8857877-.53268368-1.3833366-.02488072-.4975489.15268051-1.0033334.53268368-1.3833366l18.08168628-18.08168628c.7133028-.71330283 1.8697952-.71330283 2.5830981 0 .7133028.71330283.7133028 1.86979522 0 2.58309804z",
+        fill: "#d9e4eb",
+        transform: "translate(.265262)"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: this.picsArray[this.state.pic_num]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "carousel-btn carousel-btn-right",
+        onClick: this.moveRight.bind(this)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+        height: "40",
+        viewBox: "0 0 22 40",
+        width: "22"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+        d: "m4.31783662 20 16.88192488 16.8819248c.7133028.7133029.7133028 1.8697953 0 2.5830981-.7133029.7133028-1.8697953.7133028-2.5830981 0l-18.08168628-18.0816863c-.38000317-.3800032-.5575644-.8857877-.53268368-1.3833366-.02488072-.4975489.15268051-1.0033334.53268368-1.3833366l18.08168628-18.08168628c.7133028-.71330283 1.8697952-.71330283 2.5830981 0 .7133028.71330283.7133028 1.86979522 0 2.58309804z",
+        fill: "#d9e4eb",
+        fillRule: "evenodd",
+        transform: "matrix(-1 0 0 -1 21.734738 40)"
+      }))));
+    }
+  }]);
+
+  return Carousel;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Carousel);
+
+/***/ }),
+
 /***/ "./frontend/components/splash_page.jsx":
 /*!*********************************************!*\
   !*** ./frontend/components/splash_page.jsx ***!
@@ -626,6 +745,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _splash_carousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./splash_carousel */ "./frontend/components/splash_carousel.jsx");
+
+
 
 
 
@@ -634,81 +757,66 @@ var mstp = function mstp(state) {
   return {};
 };
 
-var splash = function splash() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+var mdtp = function mdtp(dispatch) {
+  return {
+    loginAsHarry: function loginAsHarry() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["loginAsHarry"])());
+    }
+  };
+};
+
+var splash = function splash(_ref) {
+  var loginAsHarry = _ref.loginAsHarry;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "splash"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "splash-1"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/login"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Log in to Trolle")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/signup"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "or create an account"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "or create an account")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: loginAsHarry
+  }, "Or try it as Harry")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "splash-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "copy"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Trolle lets you work more collaboratively and get more done."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Trolle\u2019s boards, lists, and cards enable you to organize and prioritize your projects in a fun, flexible, and rewarding way."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/signup"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Sign Up = It's Free"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "btn signup-btn"
+  }, "Sign Up - It's Free!"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: window.splash_image_1
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "splash-3"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "copy"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Work with any team."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Whether it\u2019s for work, a side project or even the next family vacation, Trello helps your team stay organized."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Work with any team."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Whether it\u2019s for work, a side project or even the next family vacation, Trolle helps your team stay organized."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/signup"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Start doing \u2192"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.splash_image_1
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "btn signup-btn"
+  }, "Start doing \u2192"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: window.splash_image_2
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "splash-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: window.splash_image_3
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "copy"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Information at a glance"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Dive into the details by adding comments, attachments, due dates, and more directly to Trello cards. Collaborate on projects from beginning to end.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.splash_image_1
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Information at a glance"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Dive into the details by adding comments, attachments, due dates, and more directly to Trolle cards. Collaborate on projects from beginning to end."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "splash-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "copy"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "See how it works"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Go from idea to action in seconds with Trello\u2019s intuitively simple boards, lists, and cards.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.splash_image_1
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "splash-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "copy"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Trello your way"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Use Trello the way your team works best. We\u2019ve got the flexibility & features to fit any team\u2019s style.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.splash_image_1
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "splash-7"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "copy"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "The Team Playbook"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "It\u2019s easy to get your team up and running with Trello. We\u2019ve collected all of the boards and tools you need to succeed in one handy resource."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/signup"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Make A Game Plan"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.splash_image_1
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "splash-8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "copy"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "A Productivity Platform"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Integrate the apps your team already uses directly into your workflow. Power-Ups turn Trello boards into living applications to meet your team's unique business needs."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/signup"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Power-Up Your Workflow"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.splash_image_1
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "splash-9"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "copy"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Always In Sync"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "No matter where you are, Trello stays in sync across all of your devices. Collaborate with your team anywhere, from sitting on the bus to sitting on the beach."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "See how it works"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Go from idea to action in seconds with Trolle\u2019s intuitively simple boards, lists, and cards.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_splash_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "splash-10"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.splash_image_1
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "copy"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Start Planning Today"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Sign up and become one of the millions of people around the world using Trello to get more done."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Start Planning Today"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Sign up and become one of the millions of people around the world using Trolle to get more done."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/signup"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Get Started - It's Free!"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.splash_image_1
-  })));
+  }, "Get Started - It's Free!"))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mstp)(splash));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mstp, mdtp)(splash));
 
 /***/ }),
 
@@ -30400,7 +30508,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
