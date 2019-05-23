@@ -199,6 +199,46 @@ var logout = function logout() {
 
 /***/ }),
 
+/***/ "./frontend/actions/team_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/team_actions.js ***!
+  \******************************************/
+/*! exports provided: RECEIVE_TEAMS, getTeams */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TEAMS", function() { return RECEIVE_TEAMS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTeams", function() { return getTeams; });
+var RECEIVE_TEAMS = 'RECEIVE_TEAMS';
+var getTeams = function getTeams() {
+  return function (dispatch, getState) {
+    return new Promise(function (resolve, reject) {
+      return resolve({
+        1: {
+          id: 1,
+          title: 'Dummy Team A',
+          user_id: 1,
+          members: [1, 2]
+        },
+        2: {
+          id: 2,
+          title: 'Dummy Team B',
+          user_id: 1,
+          members: [1, 2]
+        }
+      });
+    }).then(function (teams) {
+      return dispatch({
+        type: RECEIVE_TEAMS,
+        teams: teams
+      });
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/ui_actions.js":
 /*!****************************************!*\
   !*** ./frontend/actions/ui_actions.js ***!
@@ -477,6 +517,136 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./frontend/components/home_menu.jsx":
+/*!*******************************************!*\
+  !*** ./frontend/components/home_menu.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_team_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/team_actions */ "./frontend/actions/team_actions.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var mstp = function mstp(state) {
+  return {
+    teams: Object.values(state.entities.teams),
+    selectedTeam: state.ui.selectedTeam || {
+      id: -1
+    }
+  };
+};
+
+var mdtp = function mdtp(dispatch) {
+  return {
+    getTeams: function getTeams() {
+      return dispatch(Object(_actions_team_actions__WEBPACK_IMPORTED_MODULE_3__["getTeams"])());
+    }
+  };
+};
+
+var SubmenuItem = function SubmenuItem(_ref) {
+  var icon = _ref.icon,
+      text = _ref.text,
+      link = _ref.link;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: link
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, icon), text));
+};
+
+var TeamMenuLink = function TeamMenuLink(_ref2) {
+  var team = _ref2.team,
+      selectedTeam = _ref2.selectedTeam;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/teams/".concat(team.id)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "i"), team.title), team.id !== selectedTeam.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubmenuItem, {
+    icon: "",
+    text: "Highlights",
+    link: "/teams/".concat(team.id, "/highlights")
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubmenuItem, {
+    icon: "",
+    text: "All team boards",
+    link: "/teams/".concat(team.id, "/boards")
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubmenuItem, {
+    icon: "",
+    text: "Members",
+    link: "/teams/".concat(team.id, "/members")
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubmenuItem, {
+    icon: "",
+    text: "Settings",
+    link: "/teams/".concat(team.id, "/settings")
+  })));
+};
+
+var HomeMenu =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(HomeMenu, _React$Component);
+
+  function HomeMenu() {
+    _classCallCheck(this, HomeMenu);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(HomeMenu).apply(this, arguments));
+  }
+
+  _createClass(HomeMenu, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getTeams();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          teams = _this$props.teams,
+          selectedTeam = _this$props.selectedTeam;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/boards"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "i"), "Boards")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "i"), "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TEAMS"), teams.map(function (team) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TeamMenuLink, {
+          key: team.id,
+          team: team,
+          selectedTeam: selectedTeam
+        });
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "i"), "Create a team"));
+    }
+  }]);
+
+  return HomeMenu;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mstp, mdtp)(HomeMenu));
+
+/***/ }),
+
 /***/ "./frontend/components/home_or_spash_page.jsx":
 /*!****************************************************!*\
   !*** ./frontend/components/home_or_spash_page.jsx ***!
@@ -526,19 +696,12 @@ var hs = function hs(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _home_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home_menu */ "./frontend/components/home_menu.jsx");
 
 
-
-var mstp = function mstp(state) {
-  return {};
-};
-
-var home = function home() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Home Page");
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mstp)(home));
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_menu__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+});
 
 /***/ }),
 
@@ -1567,12 +1730,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _cards_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cards_reducer */ "./frontend/reducers/cards_reducer.js");
+/* harmony import */ var _teams_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./teams_reducer */ "./frontend/reducers/teams_reducer.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  cards: _cards_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  cards: _cards_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  teams: _teams_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),
@@ -1736,6 +1902,39 @@ var sessionReducer = function sessionReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (sessionReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/teams_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/teams_reducer.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_team_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/team_actions */ "./frontend/actions/team_actions.js");
+
+
+
+var teamsReducer = function teamsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_team_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_TEAMS"]:
+      return action.teams;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (teamsReducer);
 
 /***/ }),
 

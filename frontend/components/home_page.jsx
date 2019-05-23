@@ -1,8 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import HomeMenu from './home_menu'
 
-const mstp = state => ({})
-
-const home = () => <div>Home Page</div>
-
-export default connect(mstp)(home)
+export default () => (
+  <div>
+    <HomeMenu />
+  </div>
+)
