@@ -3,6 +3,7 @@
   max-width: 450px;
   margin: 0 auto;
   margin-top: 79px;
+  box-sizing: border-box;
 
   .contents-wrapper {
     display: flex;
@@ -47,7 +48,9 @@
           }
         }
         input {
-          width: calc(100% - 29px);
+          box-sizing: border-box;
+          width: 100%;
+          max-width: 430px;
           font-size: 1rem;
           border-color: #a5acb0;
           outline: none;
@@ -63,7 +66,9 @@
           }
         }
       }
-      button {
+      .button {
+        width: 100%;
+        max-width: 430px;
         margin-bottom: 1.2rem;
         background: #61bd4f;
         border-radius: 3px;
@@ -97,6 +102,8 @@
   margin-top: 24px;
   padding: 5px;
   cursor: pointer;
+  box-sizing: border-box;
+  max-width: 430px;
 
   &:hover {
     color: rgba(0, 0, 0, 0.8);

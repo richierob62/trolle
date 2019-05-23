@@ -339,10 +339,10 @@ function (_React$Component) {
           toggleBoardsMenu = _this$props.toggleBoardsMenu,
           isOpen = _this$props.isOpen;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "board-btn-bg",
-        onClick: toggleBoardsMenu
+        className: "board-btn-bg"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "board-btn-icon"
+        className: "board-btn-icon",
+        onClick: toggleBoardsMenu
       }, "Boards"), isOpen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_boards_menu__WEBPACK_IMPORTED_MODULE_1__["default"], null));
     }
   }]);
@@ -670,10 +670,11 @@ function (_React$Component) {
         type: "password",
         value: this.state.password,
         onChange: this.handleUpdate('password')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: this.state.submitOK ? 'submit-ok' : 'disabled',
-        type: "submit"
-      }, buttonText)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: this.state.submitOK ? 'button submit-ok' : 'button disabled',
+        type: "submit",
+        value: buttonText
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: loginAsHarry,
         className: "demo-user"
       }, "Log in as a Demo User")));
@@ -727,7 +728,9 @@ var nav = function nav(_ref) {
       logout = _ref.logout;
   if (isLoggedIn) return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "navbar navbar-loggedin"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_button__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_boards_menu_button__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchbar__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svg_images_logo_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_menu_button__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_menu_button__WEBPACK_IMPORTED_MODULE_8__["default"], null));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_button__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_boards_menu_button__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchbar__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svg_images_logo_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_menu_button__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_menu_button__WEBPACK_IMPORTED_MODULE_8__["default"], null));
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "navbar"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svg_images_logo_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

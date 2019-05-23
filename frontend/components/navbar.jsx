@@ -19,7 +19,9 @@ const nav = ({ isLoggedIn, logout }) => {
         <HomeButton />
         <BoardsMenuButton />
         <SearchBar />
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
         <CreateMenuButton />
         <ProfileMenuButton />
       </div>
@@ -40,6 +42,4 @@ const nav = ({ isLoggedIn, logout }) => {
   )
 }
 
-export default connect(
-  mstp
-)(nav)
+export default connect(mstp)(nav)

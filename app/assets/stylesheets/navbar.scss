@@ -25,11 +25,18 @@
     padding: 6px;
     display: flex;
 
-    svg {
+    a {
       flex: 1;
-      height: 28px;
-      width: auto;
-      opacity: 0.5;
+      text-align: center;
+      svg {
+        height: 28px;
+        width: auto;
+        opacity: 0.5;
+        &:hover {
+          opacity: 1;
+          cursor: pointer;
+        }
+      }
     }
   }
 }

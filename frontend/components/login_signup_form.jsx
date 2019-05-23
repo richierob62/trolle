@@ -105,12 +105,13 @@ class LoginSignupForm extends React.Component {
               />
             </fieldset>
 
-            <button
-              className={this.state.submitOK ? 'submit-ok' : 'disabled'}
+            <input
+              className={
+                this.state.submitOK ? 'button submit-ok' : 'button disabled'
+              }
               type="submit"
-            >
-              {buttonText}
-            </button>
+              value={buttonText}
+            />
           </form>
           <div onClick={loginAsHarry} className="demo-user">
             Log in as a Demo User
