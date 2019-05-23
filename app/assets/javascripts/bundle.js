@@ -255,7 +255,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu");
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "boards-menu"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Boards Menu"));
 });
 
 /***/ }),
@@ -528,6 +530,9 @@ var mdtp = function mdtp(dispatch) {
     },
     clearErrors: function clearErrors() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearSessionErrors"])());
+    },
+    loginAsHarry: function loginAsHarry() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["loginAsHarry"])());
     }
   };
 };
@@ -596,6 +601,11 @@ function (_React$Component) {
   }
 
   _createClass(LoginSignupForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.clearErrors();
+    }
+  }, {
     key: "checkButtonState",
     value: function checkButtonState() {
       var formType = this.props.formType;
@@ -640,7 +650,8 @@ function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           errors = _this$props.session_errors,
-          formType = _this$props.formType;
+          formType = _this$props.formType,
+          loginAsHarry = _this$props.loginAsHarry;
       var isLogin = formType === 'login';
       var headingText = isLogin ? 'Log in to Trolle' : 'Create a Trolle Account';
       var altText = isLogin ? 'or create an account' : 'or sign in to your account';
@@ -674,7 +685,10 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: this.state.submitOK ? 'submit-ok' : 'disabled',
         type: "submit"
-      }, buttonText))));
+      }, buttonText)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: loginAsHarry,
+        className: "demo-user"
+      }, "Log in as a Demo User")));
     }
   }]);
 
@@ -833,6 +847,9 @@ var mdtp = function mdtp(dispatch) {
     },
     clearErrors: function clearErrors() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearSessionErrors"])());
+    },
+    loginAsHarry: function loginAsHarry() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["loginAsHarry"])());
     }
   };
 };
@@ -990,7 +1007,7 @@ var splash = function splash(_ref) {
     to: "/signup"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "or create an account")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: loginAsHarry
-  }, "Or try it as Harry")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+  }, "Or log in as a Demo User")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "splash-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "copy"

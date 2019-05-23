@@ -15,6 +15,10 @@ class LoginSignupForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount() {
+    this.props.clearErrors()
+  }
+
   checkButtonState() {
     const { formType } = this.props
     const isLogin = formType === 'login'
@@ -50,7 +54,7 @@ class LoginSignupForm extends React.Component {
   }
 
   render() {
-    const { session_errors: errors, formType } = this.props
+    const { session_errors: errors, formType, loginAsHarry } = this.props
 
     const isLogin = formType === 'login'
     const headingText = isLogin ? 'Log in to Trolle' : 'Create a Trolle Account'
@@ -105,6 +109,9 @@ class LoginSignupForm extends React.Component {
               {buttonText}
             </button>
           </form>
+          <div onClick={loginAsHarry} className="demo-user">
+            Log in as a Demo User
+          </div>
         </div>
       </div>
     )

@@ -19,7 +19,7 @@ const splash = ({ loginAsHarry }) => (
       <Link to="/signup">
         <p>or create an account</p>
       </Link>
-      <button onClick={loginAsHarry}>Or try it as Harry</button>
+      <button onClick={loginAsHarry}>Or log in as a Demo User</button>
     </section>
     <section className="splash-2">
       <div className="copy">

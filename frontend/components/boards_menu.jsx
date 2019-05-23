@@ -1,3 +1,17 @@
 import React from 'react'
 
-export default () => <div>Boards Menu</div>
+export default () => (
+  <div className="boards-menu">
+    <div>Boards Menu</div>
+    <div>Boards Menu</div>
+    <div>Boards Menu</div>
+    <div>Boards Menu</div>
+    <div>Boards Menu</div>
+    <div>Boards Menu</div>
+    <div>Boards Menu</div>
+    <div>Boards Menu</div>
+    <div>Boards Menu</div>
+    <div>Boards Menu</div>
+    <div>Boards Menu</div>
+  </div>
+)
