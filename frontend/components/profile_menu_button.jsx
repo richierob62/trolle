@@ -28,10 +28,6 @@ class ProfileMenuButton extends React.Component {
   }
 
   checkForMenuClose(e) {
-    console.log(e.target)
-    console.log(this.node)
-
-    // debugger
     if (this.node.current && !this.node.current.contains(e.target)) {
       this.props.toggleProfileMenu()
     }

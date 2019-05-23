@@ -322,9 +322,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -354,13 +354,35 @@ var BoardMenuButton =
 function (_React$Component) {
   _inherits(BoardMenuButton, _React$Component);
 
-  function BoardMenuButton() {
+  function BoardMenuButton(props) {
+    var _this;
+
     _classCallCheck(this, BoardMenuButton);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(BoardMenuButton).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BoardMenuButton).call(this, props));
+    _this.checkForMenuClose = _this.checkForMenuClose.bind(_assertThisInitialized(_this));
+    _this.node = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    return _this;
   }
 
   _createClass(BoardMenuButton, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.addEventListener('mousedown', this.checkForMenuClose);
+    }
+  }, {
+    key: "componentWillUnMount",
+    value: function componentWillUnMount() {
+      document.removeEventListener('mousedown', this.checkForMenuClose);
+    }
+  }, {
+    key: "checkForMenuClose",
+    value: function checkForMenuClose(e) {
+      if (this.node.current && !this.node.current.contains(e.target)) {
+        this.props.toggleBoardsMenu();
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -371,7 +393,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "board-btn-icon",
         onClick: toggleBoardsMenu
-      }, "Boards"), isOpen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_boards_menu__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+      }, "Boards"), isOpen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        ref: this.node
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_boards_menu__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
     }
   }]);
 
@@ -917,9 +941,6 @@ function (_React$Component) {
   }, {
     key: "checkForMenuClose",
     value: function checkForMenuClose(e) {
-      console.log(e.target);
-      console.log(this.node); // debugger
-
       if (this.node.current && !this.node.current.contains(e.target)) {
         this.props.toggleProfileMenu();
       }
