@@ -15,10 +15,6 @@ class LoginSignupForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-    this.props.clearErrors()
-  }
-
   checkButtonState() {
     const { formType } = this.props
     const isLogin = formType === 'login'
@@ -54,7 +50,12 @@ class LoginSignupForm extends React.Component {
   }
 
   render() {
-    const { session_errors: errors, formType, loginAsHarry } = this.props
+    const {
+      session_errors: errors,
+      formType,
+      loginAsHarry,
+      clearErrors
+    } = this.props
 
     const isLogin = formType === 'login'
     const headingText = isLogin ? 'Log in to Trolle' : 'Create a Trolle Account'
@@ -69,9 +70,11 @@ class LoginSignupForm extends React.Component {
         <div className="contents-wrapper">
           {errors.length > 0 && <ErrorBlock errors={errors} />}
           <h1>{headingText}</h1>
-          <Link className="create-link" to={altURL}>
-            {altText}
-          </Link>
+          <div onClick={clearErrors}>
+            <Link className="create-link" to={altURL}>
+              {altText}
+            </Link>
+          </div>
           <form onSubmit={this.handleSubmit}>
             {!isLogin && (
               <fieldset>

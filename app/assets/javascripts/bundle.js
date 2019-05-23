@@ -601,11 +601,6 @@ function (_React$Component) {
   }
 
   _createClass(LoginSignupForm, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.clearErrors();
-    }
-  }, {
     key: "checkButtonState",
     value: function checkButtonState() {
       var formType = this.props.formType;
@@ -651,7 +646,8 @@ function (_React$Component) {
       var _this$props = this.props,
           errors = _this$props.session_errors,
           formType = _this$props.formType,
-          loginAsHarry = _this$props.loginAsHarry;
+          loginAsHarry = _this$props.loginAsHarry,
+          clearErrors = _this$props.clearErrors;
       var isLogin = formType === 'login';
       var headingText = isLogin ? 'Log in to Trolle' : 'Create a Trolle Account';
       var altText = isLogin ? 'or create an account' : 'or sign in to your account';
@@ -663,10 +659,12 @@ function (_React$Component) {
         className: "contents-wrapper"
       }, errors.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_error_block__WEBPACK_IMPORTED_MODULE_2__["default"], {
         errors: errors
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, headingText), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, headingText), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: clearErrors
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "create-link",
         to: altURL
-      }, altText), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, altText)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, !isLogin && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
