@@ -13,6 +13,30 @@ const mdtp = dispatch => ({
 })
 
 class ProfileMenuButton extends React.Component {
+  constructor(props) {
+    super(props)
+    this.checkForMenuClose = this.checkForMenuClose.bind(this)
+    this.node = React.createRef()
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.checkForMenuClose)
+  }
+
+  componentWillUnMount() {
+    document.removeEventListener('mousedown', this.checkForMenuClose)
+  }
+
+  checkForMenuClose(e) {
+    console.log(e.target)
+    console.log(this.node)
+
+    // debugger
+    if (this.node.current && !this.node.current.contains(e.target)) {
+      this.props.toggleProfileMenu()
+    }
+  }
+
   render() {
     const { toggleProfileMenu, isOpen, currentUser } = this.props
     const initials = currentUser.name
@@ -25,10 +49,12 @@ class ProfileMenuButton extends React.Component {
           {initials}
         </div>
         {isOpen && (
-          <ProfileMenu
-            currentUser={currentUser}
-            toggleProfileMenu={toggleProfileMenu}
-          />
+          <div ref={this.node}>
+            <ProfileMenu
+              currentUser={currentUser}
+              toggleProfileMenu={toggleProfileMenu}
+            />
+          </div>
         )}
       </div>
     )

@@ -22,7 +22,7 @@ const ProfileMenu = ({ logout, currentUser, toggleProfileMenu }) => (
     <div className="profile-menu-item">Something Else</div>
     <hr />
     <div
-      className="profile-menu-item"
+      className="profile-menu-item profile-menu-item-last "
       onClick={() => {
         logout()
         toggleProfileMenu()

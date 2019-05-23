@@ -1,5 +1,6 @@
 export const TOGGLE_BOARDS_MENU = 'TOGGLE_BOARDS_MENU'
 export const TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU'
+export const TOGGLE_SEARCH_RESULTS_LIST = 'TOGGLE_SEARCH_RESULTS_LIST'
 
 export const toggleBoardsMenu = () => ({
   type: TOGGLE_BOARDS_MENU
@@ -7,4 +8,8 @@ export const toggleBoardsMenu = () => ({
 
 export const toggleProfileMenu = () => ({
   type: TOGGLE_PROFILE_MENU
+})
+
+export const toggleSearchResultsList = () => ({
+  type: TOGGLE_SEARCH_RESULTS_LIST
 })

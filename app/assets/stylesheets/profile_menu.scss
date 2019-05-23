@@ -9,7 +9,7 @@
     0 0 0 1px rgba(9, 30, 66, 0.08);
 
   hr {
-    margin: 4px 0 8px;
+    margin: 8px 0 12px;
     background-color: rgba(9, 30, 66, 0.13);
     border: 0;
     height: 1px;
@@ -57,4 +57,8 @@
       color: #6b778c;
     }
   }
+}
+
+.profile-menu-item-last {
+  margin-bottom: 6px;
 }

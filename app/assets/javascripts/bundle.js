@@ -86,6 +86,26 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/card_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/card_actions.js ***!
+  \******************************************/
+/*! exports provided: RECEIVE_CARDS, receiveCards */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CARDS", function() { return RECEIVE_CARDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCards", function() { return receiveCards; });
+var RECEIVE_CARDS = 'RECEIVE_CARDS';
+var receiveCards = function receiveCards() {
+  return {
+    type: RECEIVE_CARDS
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -183,17 +203,20 @@ var logout = function logout() {
 /*!****************************************!*\
   !*** ./frontend/actions/ui_actions.js ***!
   \****************************************/
-/*! exports provided: TOGGLE_BOARDS_MENU, TOGGLE_PROFILE_MENU, toggleBoardsMenu, toggleProfileMenu */
+/*! exports provided: TOGGLE_BOARDS_MENU, TOGGLE_PROFILE_MENU, TOGGLE_SEARCH_RESULTS_LIST, toggleBoardsMenu, toggleProfileMenu, toggleSearchResultsList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_BOARDS_MENU", function() { return TOGGLE_BOARDS_MENU; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_PROFILE_MENU", function() { return TOGGLE_PROFILE_MENU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_SEARCH_RESULTS_LIST", function() { return TOGGLE_SEARCH_RESULTS_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleBoardsMenu", function() { return toggleBoardsMenu; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleProfileMenu", function() { return toggleProfileMenu; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleSearchResultsList", function() { return toggleSearchResultsList; });
 var TOGGLE_BOARDS_MENU = 'TOGGLE_BOARDS_MENU';
 var TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU';
+var TOGGLE_SEARCH_RESULTS_LIST = 'TOGGLE_SEARCH_RESULTS_LIST';
 var toggleBoardsMenu = function toggleBoardsMenu() {
   return {
     type: TOGGLE_BOARDS_MENU
@@ -202,6 +225,11 @@ var toggleBoardsMenu = function toggleBoardsMenu() {
 var toggleProfileMenu = function toggleProfileMenu() {
   return {
     type: TOGGLE_PROFILE_MENU
+  };
+};
+var toggleSearchResultsList = function toggleSearchResultsList() {
+  return {
+    type: TOGGLE_SEARCH_RESULTS_LIST
   };
 };
 
@@ -796,7 +824,7 @@ var ProfileMenu = function ProfileMenu(_ref) {
   }, "Something Else"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "profile-menu-item"
   }, "Something Else"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "profile-menu-item",
+    className: "profile-menu-item profile-menu-item-last ",
     onClick: function onClick() {
       logout();
       toggleProfileMenu();
@@ -832,9 +860,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -865,13 +893,38 @@ var ProfileMenuButton =
 function (_React$Component) {
   _inherits(ProfileMenuButton, _React$Component);
 
-  function ProfileMenuButton() {
+  function ProfileMenuButton(props) {
+    var _this;
+
     _classCallCheck(this, ProfileMenuButton);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(ProfileMenuButton).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileMenuButton).call(this, props));
+    _this.checkForMenuClose = _this.checkForMenuClose.bind(_assertThisInitialized(_this));
+    _this.node = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    return _this;
   }
 
   _createClass(ProfileMenuButton, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.addEventListener('mousedown', this.checkForMenuClose);
+    }
+  }, {
+    key: "componentWillUnMount",
+    value: function componentWillUnMount() {
+      document.removeEventListener('mousedown', this.checkForMenuClose);
+    }
+  }, {
+    key: "checkForMenuClose",
+    value: function checkForMenuClose(e) {
+      console.log(e.target);
+      console.log(this.node); // debugger
+
+      if (this.node.current && !this.node.current.contains(e.target)) {
+        this.props.toggleProfileMenu();
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -886,10 +939,12 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-btn-icon",
         onClick: toggleProfileMenu
-      }, initials), isOpen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_menu__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, initials), isOpen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        ref: this.node
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_menu__WEBPACK_IMPORTED_MODULE_1__["default"], {
         currentUser: currentUser,
         toggleProfileMenu: toggleProfileMenu
-      }));
+      })));
     }
   }]);
 
@@ -930,6 +985,27 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
+/***/ "./frontend/components/search_results_list.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/search_results_list.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var searchResults = _ref.searchResults;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "search-results-list"
+  });
+});
+
+/***/ }),
+
 /***/ "./frontend/components/searchbar.jsx":
 /*!*******************************************!*\
   !*** ./frontend/components/searchbar.jsx ***!
@@ -941,10 +1017,108 @@ var Root = function Root(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _search_results_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search_results_list */ "./frontend/components/search_results_list.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_ui_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/ui_actions */ "./frontend/actions/ui_actions.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "SearchBar");
-});
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var mstp = function mstp(state) {
+  return {
+    isOpen: !!state.ui.nav.search_results_list,
+    searchResults: Object.values(state.entities.cards).filter(function (card) {
+      debugger;
+      var card_string = (card.title + ' ' + card.description).toLowerCase();
+      var search_string = state.ui.nav.searchString.toLowerCase();
+      return card_string.indexOf(search_string) >= 0;
+    })
+  };
+};
+
+var mdtp = function mdtp(dispatch) {
+  return {
+    toggleSearchResultsList: function toggleSearchResultsList() {
+      return dispatch(Object(_actions_ui_actions__WEBPACK_IMPORTED_MODULE_3__["toggleSearchResultsList"])());
+    }
+  };
+};
+
+var SearchResultsListButton =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SearchResultsListButton, _React$Component);
+
+  function SearchResultsListButton(props) {
+    var _this;
+
+    _classCallCheck(this, SearchResultsListButton);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchResultsListButton).call(this, props));
+    _this.state = {
+      searchString: ''
+    };
+    return _this;
+  }
+
+  _createClass(SearchResultsListButton, [{
+    key: "handleInputChange",
+    value: function handleInputChange(e) {// update search input
+      // debounce 1sec
+      // fire search
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          toggleSearchResultsList = _this$props.toggleSearchResultsList,
+          isOpen = _this$props.isOpen,
+          searchString = _this$props.searchString,
+          searchResults = _this$props.searchResults;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "searchbar-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "searchbar-box"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        value: searchString,
+        onFocus: function onFocus() {
+          if (!isOpen) toggleSearchResultsList();
+        },
+        onBlur: function onBlur() {
+          if (isOpen) toggleSearchResultsList();
+        },
+        onChange: this.handleInputChange.bind(this)
+      }), !isOpen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "magnify"
+      })), isOpen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_results_list__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        searchResults: searchResults
+      }));
+    }
+  }]);
+
+  return SearchResultsListButton;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mstp, mdtp)(SearchResultsListButton));
 
 /***/ }),
 
@@ -1327,6 +1501,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./frontend/reducers/cards_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/cards_reducer.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_card_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/card_actions */ "./frontend/actions/card_actions.js");
+
+
+
+var cardsReducer = function cardsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_card_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CARDS"]:
+      return action.cards;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (cardsReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -1338,10 +1545,13 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _cards_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cards_reducer */ "./frontend/reducers/cards_reducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  cards: _cards_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
@@ -1391,6 +1601,11 @@ var navReducer = function navReducer() {
     case _actions_ui_actions__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_PROFILE_MENU"]:
       return Object.assign({}, state, {
         profile_menu: !state.profile_menu
+      });
+
+    case _actions_ui_actions__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_SEARCH_RESULTS_LIST"]:
+      return Object.assign({}, state, {
+        search_results_list: !state.search_results_list
       });
 
     default:

@@ -1,4 +1,8 @@
-import { TOGGLE_BOARDS_MENU, TOGGLE_PROFILE_MENU } from '../actions/ui_actions'
+import {
+  TOGGLE_BOARDS_MENU,
+  TOGGLE_PROFILE_MENU,
+  TOGGLE_SEARCH_RESULTS_LIST
+} from '../actions/ui_actions'
 
 const navReducer = (state = {}, action) => {
   Object.freeze(state)
@@ -8,6 +12,11 @@ const navReducer = (state = {}, action) => {
 
     case TOGGLE_PROFILE_MENU:
       return Object.assign({}, state, { profile_menu: !state.profile_menu })
+
+    case TOGGLE_SEARCH_RESULTS_LIST:
+      return Object.assign({}, state, {
+        search_results_list: !state.search_results_list
+      })
 
     default:
       return state
