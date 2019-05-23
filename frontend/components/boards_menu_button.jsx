@@ -15,8 +15,8 @@ class BoardMenuButton extends React.Component {
   render() {
     const { toggleBoardsMenu, isOpen } = this.props
     return (
-      <div className="icon" onClick={toggleBoardsMenu}>
-        <div className="icon-board">Boards</div>
+      <div className="board-btn-bg" onClick={toggleBoardsMenu}>
+        <div className="board-btn-icon">Boards</div>
         {isOpen && <BoardsMenu />}
       </div>
     )

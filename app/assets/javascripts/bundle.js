@@ -183,17 +183,25 @@ var logout = function logout() {
 /*!****************************************!*\
   !*** ./frontend/actions/ui_actions.js ***!
   \****************************************/
-/*! exports provided: TOGGLE_BOARDS_MENU, toggleBoardsMenu */
+/*! exports provided: TOGGLE_BOARDS_MENU, TOGGLE_PROFILE_MENU, toggleBoardsMenu, toggleProfileMenu */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_BOARDS_MENU", function() { return TOGGLE_BOARDS_MENU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_PROFILE_MENU", function() { return TOGGLE_PROFILE_MENU; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleBoardsMenu", function() { return toggleBoardsMenu; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleProfileMenu", function() { return toggleProfileMenu; });
 var TOGGLE_BOARDS_MENU = 'TOGGLE_BOARDS_MENU';
+var TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU';
 var toggleBoardsMenu = function toggleBoardsMenu() {
   return {
     type: TOGGLE_BOARDS_MENU
+  };
+};
+var toggleProfileMenu = function toggleProfileMenu() {
+  return {
+    type: TOGGLE_PROFILE_MENU
   };
 };
 
@@ -331,10 +339,10 @@ function (_React$Component) {
           toggleBoardsMenu = _this$props.toggleBoardsMenu,
           isOpen = _this$props.isOpen;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "icon",
+        className: "board-btn-bg",
         onClick: toggleBoardsMenu
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "icon-board"
+        className: "board-btn-icon"
       }, "Boards"), isOpen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_boards_menu__WEBPACK_IMPORTED_MODULE_1__["default"], null));
     }
   }]);
@@ -406,12 +414,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(function (_ref) {
   var history = _ref.history;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "icon",
+    className: "home-btn-bg",
     onClick: function onClick() {
       return history.push('/');
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "icon-home"
+    className: "home-btn-icon"
   }));
 }));
 
@@ -479,24 +487,6 @@ var home = function home() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mstp)(home));
-
-/***/ }),
-
-/***/ "./frontend/components/logged_in_user_menu_button.jsx":
-/*!************************************************************!*\
-  !*** ./frontend/components/logged_in_user_menu_button.jsx ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "LIU Menu Button");
-});
 
 /***/ }),
 
@@ -711,13 +701,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _svg_images_logo_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./svg_images/logo.jsx */ "./frontend/components/svg_images/logo.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _home_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home_button */ "./frontend/components/home_button.jsx");
-/* harmony import */ var _boards_menu_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./boards_menu_button */ "./frontend/components/boards_menu_button.jsx");
-/* harmony import */ var _searchbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./searchbar */ "./frontend/components/searchbar.jsx");
-/* harmony import */ var _create_menu_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./create_menu_button */ "./frontend/components/create_menu_button.jsx");
-/* harmony import */ var _logged_in_user_menu_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./logged_in_user_menu_button */ "./frontend/components/logged_in_user_menu_button.jsx");
-
+/* harmony import */ var _home_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home_button */ "./frontend/components/home_button.jsx");
+/* harmony import */ var _boards_menu_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./boards_menu_button */ "./frontend/components/boards_menu_button.jsx");
+/* harmony import */ var _searchbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./searchbar */ "./frontend/components/searchbar.jsx");
+/* harmony import */ var _create_menu_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./create_menu_button */ "./frontend/components/create_menu_button.jsx");
+/* harmony import */ var _profile_menu_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./profile_menu_button */ "./frontend/components/profile_menu_button.jsx");
 
 
 
@@ -734,22 +722,12 @@ var mstp = function mstp(state) {
   };
 };
 
-var mdtp = function mdtp(dispatch) {
-  return {
-    logout: function logout() {
-      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["logout"])());
-    }
-  };
-};
-
 var nav = function nav(_ref) {
   var isLoggedIn = _ref.isLoggedIn,
       logout = _ref.logout;
   if (isLoggedIn) return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "navbar navbar-loggedin"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_button__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_boards_menu_button__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchbar__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svg_images_logo_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_menu_button__WEBPACK_IMPORTED_MODULE_8__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_logged_in_user_menu_button__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: logout
-  }, "Sign Out"));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_button__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_boards_menu_button__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchbar__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svg_images_logo_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_menu_button__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_menu_button__WEBPACK_IMPORTED_MODULE_8__["default"], null));
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "navbar"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svg_images_logo_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -763,7 +741,159 @@ var nav = function nav(_ref) {
   }, "Sign Up")));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mstp, mdtp)(nav));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mstp)(nav));
+
+/***/ }),
+
+/***/ "./frontend/components/profile_menu.jsx":
+/*!**********************************************!*\
+  !*** ./frontend/components/profile_menu.jsx ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+
+
+
+var mdtp = function mdtp(dispatch) {
+  return {
+    logout: function logout() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["logout"])());
+    }
+  };
+};
+
+var ProfileMenu = function ProfileMenu(_ref) {
+  var logout = _ref.logout,
+      currentUser = _ref.currentUser,
+      toggleProfileMenu = _ref.toggleProfileMenu;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-menu"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-info"
+  }, "".concat(currentUser.name, " (").concat(currentUser.username, ")"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    onClick: toggleProfileMenu
+  }, "X")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-menu-item"
+  }, "Something Else"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-menu-item"
+  }, "Something Else"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-menu-item"
+  }, "Something Else"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-menu-item"
+  }, "Something Else"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-menu-item"
+  }, "Something Else"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-menu-item"
+  }, "Something Else"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-menu-item",
+    onClick: function onClick() {
+      logout();
+      toggleProfileMenu();
+    }
+  }, "Log Out"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mdtp)(ProfileMenu));
+
+/***/ }),
+
+/***/ "./frontend/components/profile_menu_button.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/profile_menu_button.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _profile_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile_menu */ "./frontend/components/profile_menu.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_ui_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/ui_actions */ "./frontend/actions/ui_actions.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var mstp = function mstp(state) {
+  return {
+    isOpen: !!state.ui.nav.profile_menu,
+    currentUser: state.entities.users[state.session.id]
+  };
+};
+
+var mdtp = function mdtp(dispatch) {
+  return {
+    toggleProfileMenu: function toggleProfileMenu() {
+      return dispatch(Object(_actions_ui_actions__WEBPACK_IMPORTED_MODULE_3__["toggleProfileMenu"])());
+    }
+  };
+};
+
+var ProfileMenuButton =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ProfileMenuButton, _React$Component);
+
+  function ProfileMenuButton() {
+    _classCallCheck(this, ProfileMenuButton);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ProfileMenuButton).apply(this, arguments));
+  }
+
+  _createClass(ProfileMenuButton, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          toggleProfileMenu = _this$props.toggleProfileMenu,
+          isOpen = _this$props.isOpen,
+          currentUser = _this$props.currentUser;
+      var initials = currentUser.name.split(' ').map(function (n) {
+        return n[0].toUpperCase();
+      }).join('');
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-btn-bg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-btn-icon",
+        onClick: toggleProfileMenu
+      }, initials), isOpen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_menu__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        currentUser: currentUser,
+        toggleProfileMenu: toggleProfileMenu
+      }));
+    }
+  }]);
+
+  return ProfileMenuButton;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mstp, mdtp)(ProfileMenuButton));
 
 /***/ }),
 
@@ -1245,9 +1375,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var navReducer = function navReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    boards_menu: false
-  };
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
@@ -1255,6 +1383,11 @@ var navReducer = function navReducer() {
     case _actions_ui_actions__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_BOARDS_MENU"]:
       return Object.assign({}, state, {
         boards_menu: !state.boards_menu
+      });
+
+    case _actions_ui_actions__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_PROFILE_MENU"]:
+      return Object.assign({}, state, {
+        profile_menu: !state.profile_menu
       });
 
     default:

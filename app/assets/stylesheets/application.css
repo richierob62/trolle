@@ -63,3 +63,7 @@ a {
 .main {
   margin-top: 75px;
 }
+
+.circle {
+  border-radius: 25rem;
+}

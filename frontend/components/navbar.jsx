@@ -2,19 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Logo from './svg_images/logo.jsx'
 import { Link } from 'react-router-dom'
-import { logout } from '../actions/session_actions'
 import HomeButton from './home_button'
 import BoardsMenuButton from './boards_menu_button'
 import SearchBar from './searchbar'
 import CreateMenuButton from './create_menu_button'
-import LoggedInUserMenuButton from './logged_in_user_menu_button'
+import ProfileMenuButton from './profile_menu_button'
 
 const mstp = state => ({
   isLoggedIn: !!state.session.id
-})
-
-const mdtp = dispatch => ({
-  logout: () => dispatch(logout())
 })
 
 const nav = ({ isLoggedIn, logout }) => {
@@ -26,9 +21,7 @@ const nav = ({ isLoggedIn, logout }) => {
         <SearchBar />
         <Logo />
         <CreateMenuButton />
-        <LoggedInUserMenuButton />
-
-        <button onClick={logout}>Sign Out</button>
+        <ProfileMenuButton />
       </div>
     )
 
@@ -48,6 +41,5 @@ const nav = ({ isLoggedIn, logout }) => {
 }
 
 export default connect(
-  mstp,
-  mdtp
+  mstp
 )(nav)
