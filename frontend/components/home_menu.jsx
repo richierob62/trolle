@@ -2,50 +2,52 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getTeams } from '../actions/team_actions'
+import { setSelectedHomeMenuItem } from '../actions/ui_actions'
 
 const mstp = state => ({
   teams: Object.values(state.entities.teams),
-  selectedTeam: state.ui.selectedTeam || { id: -1 }
+  selectedItem: state.ui.nav.home_menu || 'boards'
 })
 
 const mdtp = dispatch => ({
-  getTeams: () => dispatch(getTeams())
+  getTeams: () => dispatch(getTeams()),
+  setSelectedItem: selection => dispatch(setSelectedHomeMenuItem(selection))
 })
 
 const SubmenuItem = ({ icon, text, link }) => (
   <li>
-    <Link to={link}>
-      <span>{icon}</span>
+    <Link className="sec-link" to={link}>
+      <i className={icon} />
       {text}
     </Link>
   </li>
 )
 
-const TeamMenuLink = ({ team, selectedTeam }) => (
+const TeamMenuLink = ({ team, selectedItem, selectorFunc }) => (
   <li>
-    <Link to={`/teams/${team.id}`}>
-      <span>i</span>
+    <Link className="main-link" to={`/teams/${team.id}`} onClick={selectorFunc}>
+      <i className="fas fa-user-friends" />
       {team.title}
     </Link>
-    {team.id !== selectedTeam.id && (
+    {'team_' + team.id === selectedItem && (
       <ul>
         <SubmenuItem
-          icon=""
+          icon="far fa-heart"
           text="Highlights"
           link={`/teams/${team.id}/highlights`}
         />
         <SubmenuItem
-          icon=""
+          icon="fab fa-flipboard"
           text="All team boards"
           link={`/teams/${team.id}/boards`}
         />
         <SubmenuItem
-          icon=""
+          icon="fas fa-user-friends"
           text="Members"
           link={`/teams/${team.id}/members`}
         />
         <SubmenuItem
-          icon=""
+          icon="fas fa-cog"
           text="Settings"
           link={`/teams/${team.id}/settings`}
         />
@@ -59,28 +61,49 @@ class HomeMenu extends React.Component {
     this.props.getTeams()
   }
 
+  handleItemSelect(selection) {
+    return () => this.props.setSelectedItem(selection)
+  }
+
   render() {
-    const { teams, selectedTeam } = this.props
+    const { teams, selectedItem } = this.props
     return (
-      <ul>
-        <li>
-          <Link to={`/boards`}>
-            <span>i</span>Boards
-          </Link>
-        </li>
-        <li>
-          <Link to={`/`}>
-            <span>i</span>Home
-          </Link>
-        </li>
-        <li>TEAMS</li>
-        {teams.map(team => (
-          <TeamMenuLink key={team.id} team={team} selectedTeam={selectedTeam} />
-        ))}
-        <li>
-          <span>i</span>Create a team
-        </li>
-      </ul>
+      <nav className="home-menu">
+        <ul>
+          <li>
+            <Link
+              id="boards"
+              to={`/boards`}
+              className={selectedItem === 'boards' ? 'active' : ''}
+              onClick={this.handleItemSelect('boards')}
+            >
+              Boards
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={`main-link ${selectedItem === 'home' ? 'active' : ''}`}
+              to={`/`}
+              onClick={this.handleItemSelect('home')}
+            >
+              <i className="fas fa-home" />
+              Home
+            </Link>
+          </li>
+          <li className="header">TEAMS</li>
+          {teams.map(team => (
+            <TeamMenuLink
+              key={team.id}
+              team={team}
+              selectedItem={selectedItem}
+              selectorFunc={this.handleItemSelect('team_' + team.id)}
+            />
+          ))}
+          <li>
+            <span>i</span>Create a team
+          </li>
+        </ul>
+      </nav>
     )
   }
 }

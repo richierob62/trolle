@@ -243,7 +243,7 @@ var getTeams = function getTeams() {
 /*!****************************************!*\
   !*** ./frontend/actions/ui_actions.js ***!
   \****************************************/
-/*! exports provided: TOGGLE_BOARDS_MENU, TOGGLE_PROFILE_MENU, TOGGLE_SEARCH_RESULTS_LIST, toggleBoardsMenu, toggleProfileMenu, toggleSearchResultsList */
+/*! exports provided: TOGGLE_BOARDS_MENU, TOGGLE_PROFILE_MENU, TOGGLE_SEARCH_RESULTS_LIST, SET_SELECTED_HOME_MENU_ITEM, toggleBoardsMenu, toggleProfileMenu, toggleSearchResultsList, setSelectedHomeMenuItem */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -251,12 +251,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_BOARDS_MENU", function() { return TOGGLE_BOARDS_MENU; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_PROFILE_MENU", function() { return TOGGLE_PROFILE_MENU; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_SEARCH_RESULTS_LIST", function() { return TOGGLE_SEARCH_RESULTS_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_HOME_MENU_ITEM", function() { return SET_SELECTED_HOME_MENU_ITEM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleBoardsMenu", function() { return toggleBoardsMenu; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleProfileMenu", function() { return toggleProfileMenu; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleSearchResultsList", function() { return toggleSearchResultsList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedHomeMenuItem", function() { return setSelectedHomeMenuItem; });
 var TOGGLE_BOARDS_MENU = 'TOGGLE_BOARDS_MENU';
 var TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU';
 var TOGGLE_SEARCH_RESULTS_LIST = 'TOGGLE_SEARCH_RESULTS_LIST';
+var SET_SELECTED_HOME_MENU_ITEM = 'SET_SELECTED_HOME_MENU_ITEM';
 var toggleBoardsMenu = function toggleBoardsMenu() {
   return {
     type: TOGGLE_BOARDS_MENU
@@ -270,6 +273,12 @@ var toggleProfileMenu = function toggleProfileMenu() {
 var toggleSearchResultsList = function toggleSearchResultsList() {
   return {
     type: TOGGLE_SEARCH_RESULTS_LIST
+  };
+};
+var setSelectedHomeMenuItem = function setSelectedHomeMenuItem(selection) {
+  return {
+    type: SET_SELECTED_HOME_MENU_ITEM,
+    selection: selection
   };
 };
 
@@ -531,6 +540,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _actions_team_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/team_actions */ "./frontend/actions/team_actions.js");
+/* harmony import */ var _actions_ui_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/ui_actions */ "./frontend/actions/ui_actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -554,12 +564,11 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var mstp = function mstp(state) {
   return {
     teams: Object.values(state.entities.teams),
-    selectedTeam: state.ui.selectedTeam || {
-      id: -1
-    }
+    selectedItem: state.ui.nav.home_menu || 'boards'
   };
 };
 
@@ -567,6 +576,9 @@ var mdtp = function mdtp(dispatch) {
   return {
     getTeams: function getTeams() {
       return dispatch(Object(_actions_team_actions__WEBPACK_IMPORTED_MODULE_3__["getTeams"])());
+    },
+    setSelectedItem: function setSelectedItem(selection) {
+      return dispatch(Object(_actions_ui_actions__WEBPACK_IMPORTED_MODULE_4__["setSelectedHomeMenuItem"])(selection));
     }
   };
 };
@@ -576,29 +588,37 @@ var SubmenuItem = function SubmenuItem(_ref) {
       text = _ref.text,
       link = _ref.link;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    className: "sec-link",
     to: link
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, icon), text));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: icon
+  }), text));
 };
 
 var TeamMenuLink = function TeamMenuLink(_ref2) {
   var team = _ref2.team,
-      selectedTeam = _ref2.selectedTeam;
+      selectedItem = _ref2.selectedItem,
+      selectorFunc = _ref2.selectorFunc;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/teams/".concat(team.id)
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "i"), team.title), team.id !== selectedTeam.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubmenuItem, {
-    icon: "",
+    className: "main-link",
+    to: "/teams/".concat(team.id),
+    onClick: selectorFunc
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-user-friends"
+  }), team.title), 'team_' + team.id === selectedItem && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubmenuItem, {
+    icon: "far fa-heart",
     text: "Highlights",
     link: "/teams/".concat(team.id, "/highlights")
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubmenuItem, {
-    icon: "",
+    icon: "fab fa-flipboard",
     text: "All team boards",
     link: "/teams/".concat(team.id, "/boards")
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubmenuItem, {
-    icon: "",
+    icon: "fas fa-user-friends",
     text: "Members",
     link: "/teams/".concat(team.id, "/members")
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SubmenuItem, {
-    icon: "",
+    icon: "fas fa-cog",
     text: "Settings",
     link: "/teams/".concat(team.id, "/settings")
   })));
@@ -621,22 +641,45 @@ function (_React$Component) {
       this.props.getTeams();
     }
   }, {
+    key: "handleItemSelect",
+    value: function handleItemSelect(selection) {
+      var _this = this;
+
+      return function () {
+        return _this.props.setSelectedItem(selection);
+      };
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props = this.props,
           teams = _this$props.teams,
-          selectedTeam = _this$props.selectedTeam;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/boards"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "i"), "Boards")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "i"), "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TEAMS"), teams.map(function (team) {
+          selectedItem = _this$props.selectedItem;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        className: "home-menu"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        id: "boards",
+        to: "/boards",
+        className: selectedItem === 'boards' ? 'active' : '',
+        onClick: this.handleItemSelect('boards')
+      }, "Boards")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        className: "main-link ".concat(selectedItem === 'home' ? 'active' : ''),
+        to: "/",
+        onClick: this.handleItemSelect('home')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-home"
+      }), "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "header"
+      }, "TEAMS"), teams.map(function (team) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TeamMenuLink, {
           key: team.id,
           team: team,
-          selectedTeam: selectedTeam
+          selectedItem: selectedItem,
+          selectorFunc: _this2.handleItemSelect('team_' + team.id)
         });
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "i"), "Create a team"));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "i"), "Create a team")));
     }
   }]);
 
@@ -700,7 +743,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_menu__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "home-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_menu__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "home-content"
+  }, "// routes here"));
 });
 
 /***/ }),
@@ -1793,6 +1840,11 @@ var navReducer = function navReducer() {
     case _actions_ui_actions__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_SEARCH_RESULTS_LIST"]:
       return Object.assign({}, state, {
         search_results_list: !state.search_results_list
+      });
+
+    case _actions_ui_actions__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_HOME_MENU_ITEM"]:
+      return Object.assign({}, state, {
+        home_menu: action.selection
       });
 
     default:
