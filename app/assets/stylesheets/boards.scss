@@ -50,6 +50,7 @@
 
       form {
         padding: 10px 5px;
+        position: relative;
         // background: #00000047;
 
         .title {
@@ -71,6 +72,28 @@
             font-family: 'Arial';
             font-size: 18px;
             font-weight: bold;
+          }
+        }
+
+        .create-form-btn {
+          background-color: #5aac44;
+          box-shadow: 0 1px 0 0 #3f6f21;
+          border: none;
+          color: #fff;
+          cursor: pointer;
+          font-weight: 700;
+          line-height: 20px;
+          position: absolute;
+          bottom: -38px;
+          font-size: 14px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          left: 0px;
+
+          &.disabled {
+            background-color: #ebecf0;
+            color: #a5adba;
+            cursor: not-allowed;
           }
         }
       }

@@ -21,6 +21,28 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :session_token, :username, :email, uniqueness: true
 
+  has_many :teams_owned,
+           class_name: "Team",
+           foreign_key: :user_id
+
+  has_many :owned_boards,
+           class_name: "Board",
+           foreign_key: :user_id
+
+  has_many :shares, as: :shareable
+  has_many :boards,
+           through: :shares,
+           source: :board
+
+  has_many :team_memberships
+  has_many :teams, through: :team_memberships, source: :team
+
+  has_many :board_views, -> { order(created_at: :desc) }
+
+  has_many :recently_viewed_boards,
+           through: :board_views,
+           source: :board
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     user.try(:is_password?, password) ? user : nil

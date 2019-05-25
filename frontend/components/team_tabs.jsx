@@ -1,3 +1,3 @@
 import React from 'react'
 
-export default ({ team }) => <h1>team tabs</h1>
+export default ({ team }) => <h1>{team.title}</h1>

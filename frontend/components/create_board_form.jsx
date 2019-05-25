@@ -2,6 +2,12 @@ import React from 'react'
 import BoardBackgroundThumb from './board_background_thumb'
 import Dropdown from './drop_down'
 import VisibilityDropdown from './visibility_drop_down'
+import { connect } from 'react-redux'
+import { createBoard } from '../actions/board_actions'
+
+const mdtp = dispatch => ({
+  createBoard: board => dispatch(createBoard(board))
+})
 
 class CreateBoardForm extends React.Component {
   constructor(props) {
@@ -10,6 +16,7 @@ class CreateBoardForm extends React.Component {
     this.setTitle = this.setTitle.bind(this)
     this.checkFormExit = this.checkFormExit.bind(this)
     this.handleVisibilitySelect = this.handleVisibilitySelect.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleTeamSelect = this.handleTeamSelect.bind(this)
     this.node = React.createRef()
     this.teamOptions = [{ id: -1, title: 'No team' }, ...this.props.teams]
@@ -58,12 +65,27 @@ class CreateBoardForm extends React.Component {
     })
   }
 
+  handleSubmit(e) {
+    e.preventDefault()
+    if (!this.state.title) return
+    const { title, visibility, selectedThumb: image } = this.state
+    const new_board = {
+      image,
+      title,
+      starred: false,
+      visibility
+    }
+    this.props.createBoard(new_board).then(board => {
+      if (board && board.id) this.props.toggleCreatingBoard()
+    })
+  }
+
   render() {
     return (
       <div className="create-board-form">
         <div ref={this.node} className="wrapper">
           <div className={`form-holder ${this.state.selectedThumb}`}>
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <input
                 className="title"
                 type="text"
@@ -77,6 +99,13 @@ class CreateBoardForm extends React.Component {
                 display_key={'title'}
               />
               <VisibilityDropdown setSelected={this.handleVisibilitySelect} />
+              <input
+                className={`create-form-btn ${
+                  !!this.state.title ? 'enabled' : 'disabled'
+                }`}
+                type="submit"
+                value="Create Board"
+              />
             </form>
           </div>
           <div className="thumb-holder">
@@ -147,4 +176,7 @@ class CreateBoardForm extends React.Component {
   }
 }
 
-export default CreateBoardForm
+export default connect(
+  null,
+  mdtp
+)(CreateBoardForm)
