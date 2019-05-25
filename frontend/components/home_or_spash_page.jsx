@@ -8,10 +8,12 @@ const mstp = state => ({
   isLoggedIn: !!state.session.id
 })
 
-const hs = ({ isLoggedIn }) => (
+const hs = props => (
   <div>
-    <Navbar />
-    <div className="main">{isLoggedIn ? <HomePage /> : <SplashPage />}</div>
+    <Navbar isLoggedIn={props.isLoggedIn} />
+    <div className="main">
+      {props.isLoggedIn ? <HomePage {...props} /> : <SplashPage />}
+    </div>
   </div>
 )
 

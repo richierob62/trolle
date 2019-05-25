@@ -8,11 +8,7 @@ import SearchBar from './searchbar'
 import CreateMenuButton from './create_menu_button'
 import ProfileMenuButton from './profile_menu_button'
 
-const mstp = state => ({
-  isLoggedIn: !!state.session.id
-})
-
-const nav = ({ isLoggedIn, logout }) => {
+const nav = ({ isLoggedIn }) => {
   if (isLoggedIn)
     return (
       <div className="navbar navbar-loggedin">
@@ -42,4 +38,4 @@ const nav = ({ isLoggedIn, logout }) => {
   )
 }
 
-export default connect(mstp)(nav)
+export default nav

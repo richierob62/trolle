@@ -2,7 +2,8 @@ import {
   TOGGLE_BOARDS_MENU,
   TOGGLE_PROFILE_MENU,
   TOGGLE_SEARCH_RESULTS_LIST,
-  SET_SELECTED_HOME_MENU_ITEM
+  SET_SELECTED_HOME_MENU_ITEM,
+  TOGGLE_CREATING_BOARD
 } from '../actions/ui_actions'
 
 const navReducer = (state = {}, action) => {
@@ -22,6 +23,11 @@ const navReducer = (state = {}, action) => {
     case SET_SELECTED_HOME_MENU_ITEM:
       return Object.assign({}, state, {
         home_menu: action.selection
+      })
+
+    case TOGGLE_CREATING_BOARD:
+      return Object.assign({}, state, {
+        creating_board: !state.creating_board
       })
 
     default:
