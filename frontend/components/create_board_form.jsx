@@ -4,9 +4,15 @@ import Dropdown from './drop_down'
 import VisibilityDropdown from './visibility_drop_down'
 import { connect } from 'react-redux'
 import { createBoard } from '../actions/board_actions'
+import { getTeams } from '../actions/team_actions'
+
+const mstp = state => ({
+  teams: Object.values(state.entities.teams)
+})
 
 const mdtp = dispatch => ({
-  createBoard: board => dispatch(createBoard(board))
+  createBoard: board => dispatch(createBoard(board)),
+  getTeams: () => dispatch(getTeams())
 })
 
 class CreateBoardForm extends React.Component {
@@ -28,6 +34,7 @@ class CreateBoardForm extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getTeams()
     document.addEventListener('mousedown', this.checkFormExit)
   }
 
@@ -37,7 +44,7 @@ class CreateBoardForm extends React.Component {
 
   checkFormExit(e) {
     if (this.node.current && !this.node.current.contains(e.target)) {
-      this.props.toggleCreatingBoard()
+      this.props.history.goBack()
     }
   }
 
@@ -76,7 +83,7 @@ class CreateBoardForm extends React.Component {
       visibility
     }
     this.props.createBoard(new_board).then(board => {
-      if (board && board.id) this.props.toggleCreatingBoard()
+      if (board && board.id) this.props.history.goBack()
     })
   }
 
@@ -177,6 +184,6 @@ class CreateBoardForm extends React.Component {
 }
 
 export default connect(
-  null,
+  mstp,
   mdtp
 )(CreateBoardForm)

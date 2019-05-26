@@ -6,7 +6,6 @@ import { toggleSearchResultsList } from '../actions/ui_actions'
 const mstp = state => ({
   isOpen: !!state.ui.nav.search_results_list,
   searchResults: Object.values(state.entities.cards).filter(card => {
-    debugger
     const card_string = (card.title + ' ' + card.description).toLowerCase()
     const search_string = state.ui.nav.searchString.toLowerCase()
     return card_string.indexOf(search_string) >= 0

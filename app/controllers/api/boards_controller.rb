@@ -2,7 +2,7 @@ class Api::BoardsController < ApplicationController
   before_action :require_logged_in
 
   def index
-    @recent_boards = current_user.recently_viewed_boards.limit(5).map { |b| b.id }
+    @recent_boards = current_user.recently_viewed_boards.limit(4).map { |b| b.id }
     teams = current_user.teams
     owned = current_user.owned_boards.includes(:teams).includes(:members)
     member_as_indv = current_user.boards.includes(:teams).includes(:members)
@@ -39,10 +39,33 @@ class Api::BoardsController < ApplicationController
     if @board.save
       current_user.shares.create(board_id: @board.id)
       current_user.board_views.create(board_id: @board.id)
+      debugger
+      @board = Board.includes(:teams).includes(:members).find(@board.id)
       render :show
     else
       render json: @board.errors.full_messages, status: 422
     end
+  end
+
+  def star
+    current_user.board_stars.create(board_id: params[:id])
+    @board = Board.includes(:teams).includes(:members).find(params[:id])
+    render :show
+  end
+
+  def add_recent
+    current_user.board_views.create(board_id: params[:id])
+    @board = Board.includes(:teams).includes(:members).find(params[:id])
+    render :show
+  end
+
+  def unstar
+    bs = current_user.board_stars.where(board_id: params[:id]).first
+    if bs
+      bs.destroy
+    end
+    @board = Board.includes(:teams).includes(:members).find(params[:id])
+    render :show
   end
 
   private

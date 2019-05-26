@@ -6,6 +6,7 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       login(@user)
+      @user = User.includes(:recently_viewed_boards).includes(:starred_boards).find(@user.id)
       render :show
     else
       render json: @user.errors.full_messages, status: 422

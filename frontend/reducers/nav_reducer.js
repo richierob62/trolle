@@ -1,38 +1,31 @@
+import produce from 'immer'
+
 import {
   TOGGLE_BOARDS_MENU,
   TOGGLE_PROFILE_MENU,
   TOGGLE_SEARCH_RESULTS_LIST,
   SET_SELECTED_HOME_MENU_ITEM,
-  TOGGLE_CREATING_BOARD
 } from '../actions/ui_actions'
 
-const navReducer = (state = {}, action) => {
-  Object.freeze(state)
-  switch (action.type) {
-    case TOGGLE_BOARDS_MENU:
-      return Object.assign({}, state, { boards_menu: !state.boards_menu })
+const navReducer = (state = {}, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case TOGGLE_BOARDS_MENU:
+        draft.boards_menu = !draft.boards_menu
+        break
 
-    case TOGGLE_PROFILE_MENU:
-      return Object.assign({}, state, { profile_menu: !state.profile_menu })
+      case TOGGLE_PROFILE_MENU:
+        draft.profile_menu = !draft.profile_menu
+        break
 
-    case TOGGLE_SEARCH_RESULTS_LIST:
-      return Object.assign({}, state, {
-        search_results_list: !state.search_results_list
-      })
+      case TOGGLE_SEARCH_RESULTS_LIST:
+        draft.search_results_list = !draft.search_results_list
+        break
 
-    case SET_SELECTED_HOME_MENU_ITEM:
-      return Object.assign({}, state, {
-        home_menu: action.selection
-      })
-
-    case TOGGLE_CREATING_BOARD:
-      return Object.assign({}, state, {
-        creating_board: !state.creating_board
-      })
-
-    default:
-      return state
-  }
-}
+      case SET_SELECTED_HOME_MENU_ITEM:
+        draft.home_menu = action.selection
+        break
+    }
+  })
 
 export default navReducer

@@ -6,6 +6,7 @@ class Api::SessionsController < ApplicationController
     )
     if @user
       login(@user)
+      @user = User.includes(:recently_viewed_boards).includes(:starred_boards).find(@user.id)
       render :show
     else
       render json: ["Invalid username/password combination"], status: 401

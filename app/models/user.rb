@@ -43,6 +43,12 @@ class User < ApplicationRecord
            through: :board_views,
            source: :board
 
+  has_many :board_stars
+
+  has_many :starred_boards,
+           through: :board_stars,
+           source: :board
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     user.try(:is_password?, password) ? user : nil
