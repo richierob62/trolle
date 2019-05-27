@@ -7,8 +7,8 @@ export default ({ team, boards, history }) => (
     <div className="heading">
       <i className="fas fa-user-friends" />
       <div className="title">{team.title}</div>
-      <Link to="/">Boards</Link>
-      <Link to="/">Members</Link>
+      <Link to={`/teams/${team.id}/boards`}>Boards</Link>
+      <Link to={`/teams/${team.id}/members`}>Members</Link>
     </div>
     <div className="boards-holder">
       {boards.map(b => (
