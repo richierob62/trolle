@@ -5,7 +5,7 @@ import {
   RECEIVE_BOARDS,
   RECEIVE_BOARD,
   STAR_BOARD,
-  UNSTAR_BOARD,
+  UNSTAR_BOARD
 } from '../actions/board_actions'
 
 let starred_boards, user_recents, idx
@@ -24,7 +24,8 @@ const usersReducer = (state = {}, action) =>
       case RECEIVE_BOARD:
         user_recents = draft[action.currentUserId].recent_boards
         if (user_recents.indexOf(action.board.id) === -1)
-          user_recents.push(action.board.id)
+          user_recents.unshift(action.board.id)
+        draft[action.currentUserId].recent_boards = user_recents.slice(0, 4)
         break
 
       case STAR_BOARD:

@@ -1,2 +1,2 @@
 json.extract! team, :id, :title
-json.boards team.boards { |b| b.id }
+json.boards team.boards.map { |b| b.id }

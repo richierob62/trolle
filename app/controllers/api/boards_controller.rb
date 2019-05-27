@@ -39,7 +39,10 @@ class Api::BoardsController < ApplicationController
     if @board.save
       current_user.shares.create(board_id: @board.id)
       current_user.board_views.create(board_id: @board.id)
-      debugger
+      if params[:team_id] != "-1"
+        team = Team.find(params[:team_id])
+        team.shares.create(board_id: @board.id)
+      end
       @board = Board.includes(:teams).includes(:members).find(@board.id)
       render :show
     else

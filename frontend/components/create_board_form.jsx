@@ -11,7 +11,7 @@ const mstp = state => ({
 })
 
 const mdtp = dispatch => ({
-  createBoard: board => dispatch(createBoard(board)),
+  createBoard: (board, team_id) => dispatch(createBoard(board, team_id)),
   getTeams: () => dispatch(getTeams())
 })
 
@@ -29,7 +29,8 @@ class CreateBoardForm extends React.Component {
     this.state = {
       selectedThumb: 'img_1',
       title: '',
-      visibility: 'private'
+      visibility: 'private',
+      team_id: -1
     }
   }
 
@@ -62,7 +63,7 @@ class CreateBoardForm extends React.Component {
 
   handleTeamSelect(option) {
     this.setState({
-      team: option
+      team_id: option.id
     })
   }
 
@@ -75,14 +76,14 @@ class CreateBoardForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     if (!this.state.title) return
-    const { title, visibility, selectedThumb: image } = this.state
+    const { title, visibility, selectedThumb: image, team_id } = this.state
     const new_board = {
       image,
       title,
       starred: false,
       visibility
     }
-    this.props.createBoard(new_board).then(board => {
+    this.props.createBoard(new_board, team_id).then(board => {
       if (board && board.id) this.props.history.goBack()
     })
   }

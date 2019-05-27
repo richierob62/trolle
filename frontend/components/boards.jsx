@@ -29,6 +29,7 @@ const mdtp = dispatch => ({
 
 class Boards extends React.Component {
   componentDidMount() {
+    this.props.getTeams()
     this.props.getBoards()
   }
 
@@ -61,7 +62,9 @@ class Boards extends React.Component {
         )}
         {teams.map(t => {
           const boards = all_boards.filter(b => t.boards.indexOf(b.id) >= 0)
-          return <TeamPanel key={t.id} team={t} boards={boards} />
+          return (
+            <TeamPanel history={history} key={t.id} team={t} boards={boards} />
+          )
         })}
         <Link className="create-board-button" to="/boards/new">
           Create new board...

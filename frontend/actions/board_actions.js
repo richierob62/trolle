@@ -7,9 +7,9 @@ export const STAR_BOARD = 'STAR_BOARD'
 export const RECEIVE_VALIDATION_ERRORS = 'RECEIVE_VALIDATION_ERRORS'
 export const CLEAR_VALIDATION_ERRORS = 'CLEAR_VALIDATION_ERRORS'
 
-export const createBoard = board => (dispatch, getState) => {
+export const createBoard = (board, team_id) => (dispatch, getState) => {
   const currentUserId = getState().session.id
-  return APIUtil.createBoard(board).then(
+  return APIUtil.createBoard(board, team_id).then(
     board => {
       dispatch({
         type: RECEIVE_BOARD,

@@ -1,8 +1,8 @@
-export const createBoard = board =>
+export const createBoard = (board, team_id) =>
   $.ajax({
     method: 'POST',
     url: '/api/boards',
-    data: { board }
+    data: { board, team_id }
   })
 
 export const starBoard = id =>
