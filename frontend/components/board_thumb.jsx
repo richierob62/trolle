@@ -24,7 +24,13 @@ const BoardThumb = ({ board, starBoard, history, addBoardToRecent }) => {
       style={style}
     >
       <div className="thumb-title">{board.title}</div>
-      <i className="far fa-star" onClick={() => starBoard(board.id)} />
+      <i
+        className="far fa-star"
+        onClick={e => {
+          e.stopPropagation()
+          starBoard(board.id)
+        }}
+      />
     </div>
   )
 }
