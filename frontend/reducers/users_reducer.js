@@ -1,4 +1,4 @@
-import produce from 'immer'
+import { merge } from 'lodash'
 
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions'
 import {
@@ -10,36 +10,40 @@ import {
 
 let starred_boards, user_recents, idx
 
-const usersReducer = (state = {}, action) =>
-  produce(state, draft => {
-    switch (action.type) {
-      case RECEIVE_CURRENT_USER:
-        draft[action.currentUser.id] = action.currentUser
-        break
+const usersReducer = (state = {}, action) => {
+  const draft = merge({}, state)
 
-      case RECEIVE_BOARDS:
-        draft[action.currentUserId].recent_boards = action.recent_boards
-        break
+  switch (action.type) {
+    case RECEIVE_CURRENT_USER:
+      draft[action.currentUser.id] = action.currentUser
+      return draft
 
-      case RECEIVE_BOARD:
-        user_recents = draft[action.currentUserId].recent_boards
-        if (user_recents.indexOf(action.board.id) === -1)
-          user_recents.unshift(action.board.id)
-        draft[action.currentUserId].recent_boards = user_recents.slice(0, 4)
-        break
+    case RECEIVE_BOARDS:
+      draft[action.currentUserId].recent_boards = action.recent_boards
+      return draft
 
-      case STAR_BOARD:
-        starred_boards = draft[action.currentUserId].starred_boards
-        if (starred_boards.indexOf(action.board.id) === -1)
-          starred_boards.push(action.board.id)
-        break
+    case RECEIVE_BOARD:
+      user_recents = draft[action.currentUserId].recent_boards
+      if (user_recents.indexOf(action.board.id) === -1)
+        user_recents.unshift(action.board.id)
+      draft[action.currentUserId].recent_boards = user_recents.slice(0, 4)
+      return draft
 
-      case UNSTAR_BOARD:
-        starred_boards = draft[action.currentUserId].starred_boards
-        idx = starred_boards.indexOf(action.board.id)
-        if (idx !== -1) starred_boards = starred_boards.splice(idx, 1)
-        break
-    }
-  })
+    case STAR_BOARD:
+      starred_boards = draft[action.currentUserId].starred_boards
+      if (starred_boards.indexOf(action.board.id) === -1)
+        starred_boards.push(action.board.id)
+      return draft
+
+    case UNSTAR_BOARD:
+      starred_boards = draft[action.currentUserId].starred_boards
+      idx = starred_boards.indexOf(action.board.id)
+      if (idx !== -1) starred_boards = starred_boards.splice(idx, 1)
+      return draft
+
+    default:
+      return state
+  }
+}
 
 export default usersReducer

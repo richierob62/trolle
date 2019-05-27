@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeOrSplash from './home_or_spash_page'
+import HomeOrSplash from './home_or_splash_page'
 import LoginForm from './login_form'
 import SignupForm from './signup_form'
 import { Route, Switch } from 'react-router-dom'
