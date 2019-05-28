@@ -77,6 +77,7 @@ class Api::BoardsController < ApplicationController
     member_ids = @board.members.map do |m| m.id end
     render json: ["Unauthorized"], status: 422 unless member_ids.include?(current_user.id)
     @board.title = params[:board][:title]
+    @board.team_id = params[:board][:team_id]
     if @board.save
       @board = Board.includes(:members).find(@board.id)
       render :show
