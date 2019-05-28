@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create]
     resource :session, only: [:create, :destroy]
     resources :teams, only: [:index]
-    resources :boards, only: [:create, :index] do
+    resources :boards, only: [:create, :index, :update, :show] do
       member do
         post "star"
         post "unstar"

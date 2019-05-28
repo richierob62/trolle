@@ -2,12 +2,11 @@
 #
 # Table name: shares
 #
-#  id             :bigint           not null, primary key
-#  board_id       :integer
-#  shareable_type :string
-#  shareable_id   :bigint
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id         :bigint           not null, primary key
+#  board_id   :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer
 #
 
 require 'rails_helper'

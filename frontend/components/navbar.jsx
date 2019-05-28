@@ -9,7 +9,7 @@ import ProfileMenuButton from './profile_menu_button'
 
 const Nav = ({ isLoggedIn, location }) => {
   const style = location.pathname.match(/\/boards\/\d+/)
-    ? { background: 'transparent' }
+    ? { background: 'rgba(0,0,0,.35)' }
     : {}
 
   if (isLoggedIn)

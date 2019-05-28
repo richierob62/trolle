@@ -15,6 +15,5 @@ export const starredBoards = state => {
 
 export const personalBoards = state => {
   const boards = Object.values(state.entities.boards)
-  const current_user_id = state.session.id
-  return boards.filter(b => b.user_id === current_user_id)
+  return boards.filter(b => b.personal)
 }

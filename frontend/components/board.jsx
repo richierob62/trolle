@@ -1,23 +1,40 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getBoards } from '../actions/board_actions'
+import {
+  getBoard,
+  updateBoard,
+  starBoard,
+  unStarBoard
+} from '../actions/board_actions'
 import BoardBar from './board_bar'
 
 const mstp = (state, ownProps) => ({
-  board: state.entities.boards[ownProps.match.params.id]
+  board: state.entities.boards[ownProps.match.params.id],
+  starred_boards: state.entities.users[state.session.id].starred_boards,
+  id: parseInt([ownProps.match.params.id][0])
 })
 
 const mdtp = dispatch => ({
-  getBoards: () => dispatch(getBoards())
+  getBoard: id => dispatch(getBoard(id)),
+  updateBoard: id => dispatch(updateBoard(id)),
+  starBoard: id => dispatch(starBoard(id)),
+  unStarBoard: id => dispatch(unStarBoard(id))
 })
 
 class Board extends React.Component {
   componentDidMount() {
-    this.props.getBoards()
+    this.props.getBoard(this.props.id)
   }
 
   render() {
-    const { board } = this.props
+    const { board, updateBoard, starred_boards } = this.props
+
+    if (!board) return null
+
+    const starred = starred_boards.indexOf(board.id) >= 0
+    const toggleStarClick = starred
+      ? this.props.unStarBoard
+      : this.props.starBoard
 
     const style = board
       ? {
@@ -27,7 +44,12 @@ class Board extends React.Component {
       : {}
     return (
       <div className="board" style={style}>
-        <BoardBar board={board} />
+        <BoardBar
+          board={board}
+          updateBoard={updateBoard}
+          toggleStarClick={toggleStarClick}
+          starred={starred}
+        />
       </div>
     )
   }

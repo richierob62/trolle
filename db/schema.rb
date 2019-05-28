@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_26_180352) do
+ActiveRecord::Schema.define(version: 2019_05_27_214620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,24 +35,24 @@ ActiveRecord::Schema.define(version: 2019_05_26_180352) do
 
   create_table "boards", force: :cascade do |t|
     t.string "title", null: false
-    t.boolean "starred", default: false
     t.integer "user_id", null: false
     t.string "image", null: false
     t.string "visibility", default: "private"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "team_id"
+    t.boolean "personal", default: true
+    t.index ["team_id"], name: "index_boards_on_team_id"
     t.index ["title"], name: "index_boards_on_title"
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
   create_table "shares", force: :cascade do |t|
     t.integer "board_id"
-    t.string "shareable_type"
-    t.bigint "shareable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["board_id", "shareable_type"], name: "index_shares_on_board_id_and_shareable_type", unique: true
-    t.index ["shareable_type", "shareable_id"], name: "index_shares_on_shareable_type_and_shareable_id"
+    t.integer "user_id"
+    t.index ["board_id", "user_id"], name: "index_shares_on_board_id_and_user_id", unique: true
   end
 
   create_table "team_memberships", force: :cascade do |t|

@@ -61,7 +61,7 @@ class Boards extends React.Component {
           />
         )}
         {teams.map(t => {
-          const boards = all_boards.filter(b => t.boards.indexOf(b.id) >= 0)
+          const boards = all_boards.filter(b => b.team_id === t.id)
           return (
             <TeamPanel history={history} key={t.id} team={t} boards={boards} />
           )

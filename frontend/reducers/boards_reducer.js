@@ -7,7 +7,7 @@ const boardsReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_BOARDS:
-      return action.boards
+      return action.boards || state
 
     case RECEIVE_BOARD:
       draft[action.board.id] = action.board

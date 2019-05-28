@@ -9,7 +9,7 @@ export const CLEAR_VALIDATION_ERRORS = 'CLEAR_VALIDATION_ERRORS'
 
 export const createBoard = (board, team_id) => (dispatch, getState) => {
   const currentUserId = getState().session.id
-  return APIUtil.createBoard(board, team_id).then(
+  return APIUtil.createBoard(board).then(
     board => {
       dispatch({
         type: RECEIVE_BOARD,
@@ -101,6 +101,44 @@ export const unStarBoard = id => (dispatch, getState) => {
 export const addBoardToRecent = id => (dispatch, getState) => {
   const currentUserId = getState().session.id
   return APIUtil.addBoardToRecent(id).then(
+    board => {
+      dispatch({
+        type: RECEIVE_BOARD,
+        board,
+        currentUserId
+      })
+      return board
+    },
+    errors =>
+      dispatch({
+        type: RECEIVE_VALIDATION_ERRORS,
+        errors
+      })
+  )
+}
+
+export const updateBoard = board => (dispatch, getState) => {
+  const currentUserId = getState().session.id
+  return APIUtil.updateBoard(board).then(
+    board => {
+      dispatch({
+        type: RECEIVE_BOARD,
+        board,
+        currentUserId
+      })
+      return board
+    },
+    errors =>
+      dispatch({
+        type: RECEIVE_VALIDATION_ERRORS,
+        errors
+      })
+  )
+}
+
+export const getBoard = id => (dispatch, getState) => {
+  const currentUserId = getState().session.id
+  return APIUtil.getBoard(id).then(
     board => {
       dispatch({
         type: RECEIVE_BOARD,

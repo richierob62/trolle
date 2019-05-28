@@ -29,7 +29,7 @@ class User < ApplicationRecord
            class_name: "Board",
            foreign_key: :user_id
 
-  has_many :shares, as: :shareable
+  has_many :shares
   has_many :boards,
            through: :shares,
            source: :board

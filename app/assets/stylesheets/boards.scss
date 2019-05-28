@@ -301,4 +301,136 @@
   right: 0;
   padding-top: 40px;
   overflow: hidden;
+
+  .board-bar {
+    background: rgba(0, 0, 0, 0.24);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    padding: 9px 0;
+
+    .board-name {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 32px;
+      margin-left: 11px;
+      padding-left: 10px;
+      padding-right: 2px;
+      text-decoration: none;
+      white-space: nowrap;
+      outline: none;
+      border: none;
+      height: 30px;
+      border-radius: 3px;
+    }
+
+    i.fa-star {
+      color: #fff;
+      padding: 9px;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 13px;
+
+      &.starred {
+        color: #e6c60d;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .board-team-label {
+      position: relative;
+      .label {
+        border-radius: 3px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        height: 32px;
+        line-height: 32px;
+        margin: 0 4px 0 0;
+        padding: 2px 7px;
+        font-family: 'Arial';
+        &:hover {
+          background: rgba(0, 0, 0, 0.3);
+        }
+      }
+      .existing-team,
+      .changing-team {
+        position: absolute;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        border-radius: 3px;
+        box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25),
+          0 0 0 1px rgba(9, 30, 66, 0.08);
+        z-index: 200;
+        width: 300px;
+
+        .top-row {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
+          border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+          .title {
+            color: #6b778c;
+            line-height: 40px;
+            margin: 0 12px;
+            padding: 0 32px;
+            font-family: 'Share';
+            flex: 1;
+            text-align: center;
+            font-size: 16px;
+          }
+          .close {
+            margin-right: 11px;
+            font-size: 15px;
+            color: #6b778c8a;
+            cursor: pointer;
+          }
+          .back {
+            margin-left: 11px;
+            font-size: 15px;
+            color: #6b778c8a;
+            cursor: pointer;
+          }
+        }
+        .change-team,
+        a {
+          font-size: 15px;
+          font-family: 'Arial';
+          font-weight: bold;
+          padding: 4px 8px;
+          cursor: pointer;
+          color: #172b4d;
+
+          &:hover {
+            background-color: #298fca;
+            color: #fff;
+          }
+        }
+        .part-of {
+          color: #172b4d;
+          font-size: 15px;
+          font-family: 'Arial';
+          font-weight: bold;
+          padding: 5px 13px;
+        }
+
+        select {
+          margin: 0 10px;
+          height: 23px;
+          margin-top: -5px;
+          font-size: 14px;
+        }
+
+        .bottom-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+    }
+  }
 }

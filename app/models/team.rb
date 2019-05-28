@@ -17,12 +17,7 @@ class Team < ApplicationRecord
   has_many :team_memberships
   has_many :members, through: :team_memberships, source: :user
 
-  has_many :shares, as: :shareable
+  has_many :shares, through: :members, source: :shares
 
-  # SELECT "boards".* FROM "boards" INNER JOIN
-  # "shares" ON "boards"."id" = "shares"."board_id"
-  # WHERE "shares"."shareable_id" = $1 AND "shares"."shareable_type" = $2
-  has_many :boards,
-           through: :shares,
-           source: :board
+  has_many :boards
 end
