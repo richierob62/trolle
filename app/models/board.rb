@@ -32,6 +32,12 @@ class Board < ApplicationRecord
            through: :team,
            source: :members
 
+  has_many :lists
+
+  has_many :cards,
+           through: :lists,
+           source: :cards
+
   def members
     output = []
     output << self.owner

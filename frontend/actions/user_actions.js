@@ -17,7 +17,7 @@ export const getMatchingUsers = (matching_string, board_id) => dispatch => {
 export const inviteUsers = (user_ids, board_id) => (dispatch, getState) => {
   const currentUserId = getState().session.id
 
-  ApiUtils.inviteUsers(user_ids, board_id).then(board => {
+  ApiUtils.inviteUsers(user_ids, board_id).then(({ board }) => {
     dispatch({
       type: RECEIVE_BOARD,
       board,

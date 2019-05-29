@@ -7,6 +7,7 @@ import {
   unStarBoard
 } from '../actions/board_actions'
 import BoardBar from './board_bar'
+import ListCollection from './list_collection'
 
 const mstp = (state, ownProps) => ({
   board: state.entities.boards[ownProps.match.params.id],
@@ -50,6 +51,7 @@ class Board extends React.Component {
           toggleStarClick={toggleStarClick}
           starred={starred}
         />
+        <ListCollection board={board} />
       </div>
     )
   }

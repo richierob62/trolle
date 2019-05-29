@@ -1,4 +1,6 @@
 import * as APIUtil from '../util/board_api_util'
+import { RECEIVE_LISTS } from './list_actions'
+import { RECEIVE_CARDS } from './card_actions'
 
 export const RECEIVE_BOARD = 'RECEIVE_BOARD'
 export const RECEIVE_BOARDS = 'RECEIVE_BOARDS'
@@ -12,7 +14,7 @@ export const RECEIVE_MEMBERS = 'RECEIVE_MEMBERS'
 export const createBoard = (board, team_id) => (dispatch, getState) => {
   const currentUserId = getState().session.id
   return APIUtil.createBoard(board).then(
-    board => {
+    ({ board }) => {
       dispatch({
         type: RECEIVE_BOARD,
         board,
@@ -55,7 +57,7 @@ export const getBoards = () => (dispatch, getState) => {
 export const starBoard = id => (dispatch, getState) => {
   const currentUserId = getState().session.id
   return APIUtil.starBoard(id).then(
-    board => {
+    ({ board }) => {
       dispatch({
         type: RECEIVE_BOARD,
         board,
@@ -79,7 +81,7 @@ export const starBoard = id => (dispatch, getState) => {
 export const unStarBoard = id => (dispatch, getState) => {
   const currentUserId = getState().session.id
   return APIUtil.unStarBoard(id).then(
-    board => {
+    ({ board }) => {
       dispatch({
         type: RECEIVE_BOARD,
         board,
@@ -103,7 +105,7 @@ export const unStarBoard = id => (dispatch, getState) => {
 export const addBoardToRecent = id => (dispatch, getState) => {
   const currentUserId = getState().session.id
   return APIUtil.addBoardToRecent(id).then(
-    board => {
+    ({ board }) => {
       dispatch({
         type: RECEIVE_BOARD,
         board,
@@ -122,11 +124,19 @@ export const addBoardToRecent = id => (dispatch, getState) => {
 export const updateBoard = board => (dispatch, getState) => {
   const currentUserId = getState().session.id
   return APIUtil.updateBoard(board).then(
-    board => {
+    ({ board, lists, cards }) => {
       dispatch({
         type: RECEIVE_BOARD,
         board,
         currentUserId
+      })
+      dispatch({
+        type: RECEIVE_LISTS,
+        lists
+      })
+      dispatch({
+        type: RECEIVE_CARDS,
+        cards
       })
       return board
     },
@@ -141,11 +151,19 @@ export const updateBoard = board => (dispatch, getState) => {
 export const getBoard = id => (dispatch, getState) => {
   const currentUserId = getState().session.id
   return APIUtil.getBoard(id).then(
-    board => {
+    ({ board, lists, cards }) => {
       dispatch({
         type: RECEIVE_BOARD,
         board,
         currentUserId
+      })
+      dispatch({
+        type: RECEIVE_LISTS,
+        lists
+      })
+      dispatch({
+        type: RECEIVE_CARDS,
+        cards
       })
       return board
     },
