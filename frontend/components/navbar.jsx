@@ -4,7 +4,6 @@ import { Link, withRouter } from 'react-router-dom'
 import HomeButton from './home_button'
 import BoardsMenuButton from './boards_menu_button'
 import SearchBar from './searchbar'
-import CreateMenuButton from './create_menu_button'
 import ProfileMenuButton from './profile_menu_button'
 
 const Nav = ({ isLoggedIn, location }) => {
@@ -21,7 +20,6 @@ const Nav = ({ isLoggedIn, location }) => {
         <Link to="/">
           <Logo />
         </Link>
-        <CreateMenuButton />
         <ProfileMenuButton />
       </div>
     )

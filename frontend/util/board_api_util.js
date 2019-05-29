@@ -1,4 +1,4 @@
-export const createBoard = (board) =>
+export const createBoard = board =>
   $.ajax({
     method: 'POST',
     url: '/api/boards',
@@ -23,6 +23,12 @@ export const getBoards = () =>
     url: '/api/boards'
   })
 
+export const getMembers = id =>
+  $.ajax({
+    method: 'GET',
+    url: `/api/boards/${id}/members`
+  })
+
 export const getBoard = id =>
   $.ajax({
     method: 'GET',
@@ -40,4 +46,18 @@ export const updateBoard = board =>
     method: 'PATCH',
     url: `/api/boards/${board.id}`,
     data: { board }
+  })
+
+export const getMatchingUsers = (matching_string, board_id) =>
+  $.ajax({
+    method: 'GET',
+    url: `/api/boards/${board_id}/matching`,
+    data: { matching_string }
+  })
+
+export const inviteUsers = (user_ids, board_id) =>
+  $.ajax({
+    method: 'POST',
+    url: `/api/boards/${board_id}/share`,
+    data: { user_ids }
   })

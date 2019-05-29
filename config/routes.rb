@@ -4,10 +4,13 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :teams, only: [:index, :create]
     resources :boards, only: [:create, :index, :update, :show] do
+      resources :members, only: [:index]
       member do
         post "star"
         post "unstar"
         post "add_recent"
+        get "matching"
+        post "share"
       end
     end
   end

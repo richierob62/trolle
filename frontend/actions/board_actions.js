@@ -6,6 +6,8 @@ export const UNSTAR_BOARD = 'UNSTAR_BOARD'
 export const STAR_BOARD = 'STAR_BOARD'
 export const RECEIVE_VALIDATION_ERRORS = 'RECEIVE_VALIDATION_ERRORS'
 export const CLEAR_VALIDATION_ERRORS = 'CLEAR_VALIDATION_ERRORS'
+export const GET_MEMBERS = 'GET_MEMBERS'
+export const RECEIVE_MEMBERS = 'RECEIVE_MEMBERS'
 
 export const createBoard = (board, team_id) => (dispatch, getState) => {
   const currentUserId = getState().session.id
@@ -146,6 +148,23 @@ export const getBoard = id => (dispatch, getState) => {
         currentUserId
       })
       return board
+    },
+    errors =>
+      dispatch({
+        type: RECEIVE_VALIDATION_ERRORS,
+        errors
+      })
+  )
+}
+
+export const getMembers = board_id => (dispatch, getState) => {
+  return APIUtil.getMembers(board_id).then(
+    ({ members }) => {
+      dispatch({
+        type: RECEIVE_MEMBERS,
+        members
+      })
+      return members
     },
     errors =>
       dispatch({

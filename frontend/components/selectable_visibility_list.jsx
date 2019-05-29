@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Dropdown extends React.Component {
+class VisibilityList extends React.Component {
   constructor(props) {
     super(props)
 
@@ -69,21 +69,18 @@ class Dropdown extends React.Component {
   }
 
   render() {
-    let displayValue, displayIcon
+    let displayValue
     if (this.state.selected === 'private') {
       displayValue = <div>Private</div>
-      displayIcon = <i className="logo lock fas fa-lock" />
     } else if (this.state.selected === 'team') {
       displayValue = <div>Team</div>
-      displayIcon = <i className="logo team fas fa-user-friends" />
     } else {
       displayValue = <div>Public</div>
-      displayIcon = <i className="logo world fas fa-globe" />
     }
     return (
       <div className="visibility-dropdown">
         <div className="visibility-dropdown-top" onClick={this.toggleOptions}>
-          {displayIcon}
+          <i className="fas fa-user-friends" />
           <div className="visibility-dropdown-value">{displayValue}</div>
           <i className="visibility-dropdown-arrow fas fa-angle-down" />
         </div>
@@ -116,4 +113,4 @@ class Dropdown extends React.Component {
   }
 }
 
-export default Dropdown
+export default VisibilityList

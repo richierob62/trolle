@@ -1,6 +1,9 @@
 import React from 'react'
 import { merge } from 'lodash'
 import BoardTeamLabel from './board_team_label'
+import VisibilityDropDown from './visibility_change'
+import BoardMemberIconsList from './board_members_icons_list'
+import InviteButton from './invite_button'
 
 class BoardBar extends React.Component {
   constructor(props) {
@@ -10,6 +13,7 @@ class BoardBar extends React.Component {
     this.toggleHoverEffect = this.toggleHoverEffect.bind(this)
     this.handleTitleChange = this.handleTitleChange.bind(this)
     this.handleStarClick = this.handleStarClick.bind(this)
+    this.setSelectedVisibility = this.setSelectedVisibility.bind(this)
     this.state = {
       titleInputFocused: false,
       titleInputHovered: false,
@@ -63,6 +67,12 @@ class BoardBar extends React.Component {
     this.props.toggleStarClick(board.id)
   }
 
+  setSelectedVisibility(option) {
+    const newBoard = merge({}, this.props.board)
+    newBoard.visibility = option
+    this.props.updateBoard(newBoard)
+  }
+
   render() {
     const { board, starred } = this.props
     const { titleInputFocused, titleInputHovered, boardTitle } = this.state
@@ -105,6 +115,12 @@ class BoardBar extends React.Component {
           }}
         />
         <BoardTeamLabel board={board} />
+        <VisibilityDropDown
+          setSelected={this.setSelectedVisibility}
+          selected={board.visibility}
+        />
+        <BoardMemberIconsList board={board} />
+        <InviteButton board={board} />
       </div>
     )
   }

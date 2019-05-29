@@ -57,3 +57,12 @@
   font-weight: bold;
   font-family: 'Arial';
 }
+
+.board-bar {
+  .icon-list {
+    padding: 0;
+    margin: 0;
+    margin-left: 17px;
+    display: flex;
+  }
+}

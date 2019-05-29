@@ -14,15 +14,33 @@
 #
 
 class Board < ApplicationRecord
+  attr_accessor :members
+
   validates :title, :image, :visibility, presence: true
 
   belongs_to :owner, class_name: "User", foreign_key: :user_id
   has_many :shares
 
-  has_many :members,
+  has_many :indv_members,
            through: :shares,
            source: :user
 
   belongs_to :team,
              optional: true
+
+  has_many :members_via_team,
+           through: :team,
+           source: :members
+
+  def members
+    output = []
+    output << self.owner
+    self.indv_members.each do |m|
+      output << m unless output.include?(m)
+    end
+    self.members_via_team.each do |m|
+      output << m unless output.include?(m)
+    end
+    output
+  end
 end

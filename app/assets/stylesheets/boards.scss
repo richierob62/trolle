@@ -561,3 +561,76 @@
     }
   }
 }
+
+.visibility-dropdown.changer {
+  font-family: 'Arial';
+  margin-left: 8px;
+
+  .visibility-dropdown-top {
+    padding: 10px 10px;
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .visibility-dropdown-value {
+      font-size: 14px;
+    }
+
+    i {
+      color: white;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+  }
+
+  .visibility-dropdown-options {
+    .top-row {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+
+      .title {
+        color: #6b778c;
+        line-height: 40px;
+        margin: 0 12px;
+        padding: 0 32px;
+        font-family: 'Share';
+        flex: 1;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .close {
+        margin-right: 11px;
+        font-size: 15px;
+        color: #6b778c8a;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.invite-btn {
+  margin-left: 13px;
+  position: relative;
+  .label {
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 4px 0 0;
+    padding: 2px 7px;
+    font-family: 'Arial';
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+  .invite-dialog {
+    position: absolute;
+  }
+}

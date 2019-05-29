@@ -5,7 +5,8 @@ import {
   RECEIVE_BOARDS,
   RECEIVE_BOARD,
   STAR_BOARD,
-  UNSTAR_BOARD
+  UNSTAR_BOARD,
+  RECEIVE_MEMBERS
 } from '../actions/board_actions'
 
 let starred_boards, user_recents, idx
@@ -39,6 +40,10 @@ const usersReducer = (state = {}, action) => {
       starred_boards = draft[action.currentUserId].starred_boards
       idx = starred_boards.indexOf(action.board.id)
       if (idx !== -1) starred_boards = starred_boards.splice(idx, 1)
+      return draft
+
+    case RECEIVE_MEMBERS:
+      Object.values(action.members).forEach(m => (draft[m.id] = m))
       return draft
 
     default:
