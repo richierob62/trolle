@@ -6,6 +6,13 @@ class Api::ListsController < ApplicationController
     render "api/boards/show.json.jbuilder"
   end
 
+  def update
+    @list = List.find(params[:id])
+    @list.update(list_params)
+    @board = Board.find(@list.board_id)
+    render "api/boards/show.json.jbuilder"
+  end
+
   private
 
   def list_params

@@ -1,14 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ListAdder from './list_adder'
+import List from './list'
 import { createList } from '../actions/list_actions'
 
 const mstp = state => ({
-  lists: Object.values(state.entities.lists)
+lists: Object.values(state.entities.lists)
 })
 
 const mdtp = dispatch => ({
-  createList: (list, board) => dispatch(createList(list, board))
+createList: (list, board) => dispatch(createList(list, board))
 })
 
 class ListCollection extends React.Component {
@@ -19,7 +20,9 @@ class ListCollection extends React.Component {
       <div className="list-holder">
         <ul>
           {lists.map(l => (
-            <li key={l.id}>{l.title}</li>
+            <li className="list-item" key={l.id}>
+              <List list={l} />
+            </li>
           ))}
         </ul>
         <ListAdder

@@ -1,6 +1,6 @@
 import React from 'react'
 
-class ListAdder extends React.Component {
+class CardAdder extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -32,11 +32,11 @@ class ListAdder extends React.Component {
   handleCreate(e) {
     e.stopPropagation()
     const { title } = this.state
-    const { board } = this.props
+    const { list } = this.props
     if (!title) return
 
-    const newList = { title }
-    this.props.createList(newList, board)
+    const newCard = { title }
+    this.props.createCard(newCard, list)
     this.setState({
       open: false,
       title: ''
@@ -70,28 +70,31 @@ class ListAdder extends React.Component {
     const { first } = this.props
 
     return open ? (
-      <div className="add-form" onKeyPress={this.checkKeyPressForEnter}>
+      <div
+        className="add-form add-card-form"
+        onKeyPress={this.checkKeyPressForEnter}
+      >
         <input
           className="input-field"
           ref={this.input_node}
           type="text"
           value={this.state.title}
           onChange={this.handleChange}
-          placeholder="Enter list title..."
+          placeholder="Enter a title for this card..."
           autoFocus={true}
         />
         <div>
-          <input type="submit" onClick={this.handleCreate} value=" Add List" />
+          <input type="submit" onClick={this.handleCreate} value=" Add Card" />
           <i className="fas fa-times" />
         </div>
       </div>
     ) : (
-      <div className="add-btn add-list-btn" onClick={this.openDialog}>
+      <div className="add-card-btn add-btn" onClick={this.openDialog}>
         <i className="fas fa-plus" />
-        {`Add ${first ? 'another' : 'a'} list`}
+        {`Add ${first ? 'another' : 'a'} card`}
       </div>
     )
   }
 }
 
-export default ListAdder
+export default CardAdder

@@ -14,6 +14,9 @@ Rails.application.routes.draw do
         post "share"
       end
     end
+    resources :lists, only: [:update] do
+      resources :cards, only: [:create]
+    end
   end
 
   root to: "static_pages#root"

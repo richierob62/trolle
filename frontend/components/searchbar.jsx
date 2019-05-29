@@ -1,27 +1,27 @@
 import React from 'react'
 import SearchResultsList from './search_results_list'
 import { connect } from 'react-redux'
-import { toggleSearchResultsList } from '../actions/ui_actions'
 
 const mstp = state => ({
-  isOpen: !!state.ui.nav.search_results_list,
-  searchResults: Object.values(state.entities.cards).filter(card => {
-    const card_string = (card.title + ' ' + card.description).toLowerCase()
-    const search_string = state.ui.nav.searchString.toLowerCase()
-    return card_string.indexOf(search_string) >= 0
-  })
+  searchResults: [] // temp
 })
 
-const mdtp = dispatch => ({
-  toggleSearchResultsList: () => dispatch(toggleSearchResultsList())
-})
+const mdtp = dispatch => ({})
 
 class SearchResultsListButton extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      searchString: ''
+      searchString: '',
+      open: false
     }
+    this.toggleSearchResultsList = this.toggleSearchResultsList.bind(this)
+  }
+
+  toggleSearchResultsList() {
+    this.setState({
+      open: !this.state.open
+    })
   }
 
   handleInputChange(e) {
@@ -31,29 +31,26 @@ class SearchResultsListButton extends React.Component {
   }
 
   render() {
-    const {
-      toggleSearchResultsList,
-      isOpen,
-      searchString,
-      searchResults
-    } = this.props
+    const { searchResults } = this.props
+    const { open, searchString } = this.state
+
     return (
       <div className="searchbar-container">
         <div className="searchbar-box">
           <input
             value={searchString}
             onFocus={() => {
-              if (!isOpen) toggleSearchResultsList()
+              if (!open) this.toggleSearchResultsList()
             }}
             onBlur={() => {
-              if (isOpen) toggleSearchResultsList()
+              if (open) this.toggleSearchResultsList()
             }}
             onChange={this.handleInputChange.bind(this)}
           />
-          {!isOpen && <span className="magnify" />}
+          {!open && <span className="magnify" />}
         </div>
 
-        {isOpen && <SearchResultsList searchResults={searchResults} />}
+        {open && <SearchResultsList searchResults={searchResults} />}
       </div>
     )
   }

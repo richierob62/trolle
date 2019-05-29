@@ -83,4 +83,42 @@
       }
     }
   }
+
+  .add-card-form {
+    width: auto;
+  }
+
+  .add-list-btn {
+    margin-left: 4px;
+  }
+
+  ul {
+    display: flex;
+    align-items: flex-start;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 5px;
+
+    .list-item {
+      margin: 0 4px;
+      width: 272px;
+      background-color: #dfe1e6;
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+
+      .add-card-btn {
+        background-color: transparent;
+        color: #6b778c;
+        width: auto;
+      }
+    }
+  }
+}
+
+.list-frame {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
 }

@@ -1,3 +1,47 @@
+import entities_reducer from '../reducers/entities_reducer'
+
+import * as APIUtil from '../util/card_api_util'
+
+import { RECEIVE_BOARD } from './board_actions'
+import { RECEIVE_LISTS } from './list_actions'
+
 export const RECEIVE_CARDS = 'RECEIVE_CARDS'
 
+export const createCard = (card, list) => (dispatch, getState) => {
+  const currentUserId = getState().session.id
+  const cards = Object.values(getState().entities.cards)
+    .filter(c => c.list_id === list.id)
+    .sort((c1, c2) => c1.order - c2.order)
+  let order
+  if (cards.length === 0) {
+    order = 1
+  } else {
+    order = cards[cards.length - 1]['order'] + 1
+  }
+  card.order = order
+  return APIUtil.createCard(card, list).then(
+    ({ board, lists, cards }) => {
+      dispatch({
+        type: RECEIVE_BOARD,
+        board,
+        currentUserId
+      })
+      dispatch({
+        type: RECEIVE_LISTS,
+        lists
+      })
+      dispatch({
+        type: RECEIVE_CARDS,
+        cards
+      })
+      return cards
+    },
+    errors =>
+      dispatch({
+        type: RECEIVE_VALIDATION_ERRORS,
+        errors
+      })
+  )
+}
 
+// POST /api/lists/:list_id/cards
