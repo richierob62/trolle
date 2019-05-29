@@ -1,18 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getMembers } from '../actions/board_actions'
-
-const MemberIcon = ({ member }) => {
-  const initials = member.name
-    .split(' ')
-    .map(n => n[0].toUpperCase())
-    .join('')
-  return (
-    <li className="profile-btn-bg">
-      <div className="profile-btn-icon">{initials}</div>
-    </li>
-  )
-}
+import MemberIcon from './member_icon'
 
 const mstp = (state, ownProps) => ({
   members: Object.values(state.entities.users).filter(
@@ -33,7 +22,9 @@ class IconList extends React.Component {
     return (
       <ul className="icon-list">
         {this.props.members.map(m => (
-          <MemberIcon key={m.id} member={m} />
+          <li key={m.id} className="profile-btn-bg">
+            <MemberIcon user={m} />
+          </li>
         ))}
       </ul>
     )

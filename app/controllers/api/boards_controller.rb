@@ -89,9 +89,22 @@ class Api::BoardsController < ApplicationController
   end
 
   def matching
-    querystring = "username LIKE '%#{params[:matching_string]}%' OR email LIKE '%#{params[:matching_string]}%' OR name LIKE '%#{params[:matching_string]}%' "
+    querystring = "LOWER(username) LIKE LOWER('%#{params[:matching_string]}%')
+     OR LOWER(email) LIKE LOWER('%#{params[:matching_string]}%')
+      OR LOWER(name) LIKE LOWER('%#{params[:matching_string]}%') "
     @users = User.where(querystring)
     render "api/users/index.json.jbuilder"
+  end
+
+  def share
+    @board = Board.find(params[:id])
+    member_ids = @board.members.map do |m| m.id end
+    render json: ["Unauthorized"], status: 422 unless member_ids.include?(current_user.id)
+    params[:user_ids].each do |id|
+      @board.shares.create(user_id: id)
+    end
+    @board = Board.find(params[:id])
+    render :show
   end
 
   private

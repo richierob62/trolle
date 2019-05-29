@@ -1,25 +1,29 @@
 import * as ApiUtils from '../util/board_api_util'
 
-export const RECEIVE_MATCHING_USERS = 'RECEIVE_MATCHING_USERS'
-export const UPDATE_MEMBERSHIP = 'UPDATE_MEMBERSHIP'
+import { RECEIVE_BOARD, getMembers } from './board_actions'
 
-export const getMatchingUsers = (matching_string, board_id) => (
-  dispatch,
-) => {
-  return ApiUtils.getMatchingUsers(matching_string, board_id).then(({users}) =>
-    dispatch({
-      type: RECEIVE_MATCHING_USERS,
-      users
-    })
+export const RECEIVE_MATCHING_USERS = 'RECEIVE_MATCHING_USERS'
+
+export const getMatchingUsers = (matching_string, board_id) => dispatch => {
+  return ApiUtils.getMatchingUsers(matching_string, board_id).then(
+    ({ users }) =>
+      dispatch({
+        type: RECEIVE_MATCHING_USERS,
+        users
+      })
   )
 }
 
-export const inviteUsers = (user_ids, board_id) => (dispatch, getState) =>
-  ApiUtils.inviteUsers(user_ids, board_id).then(users => {
+export const inviteUsers = (user_ids, board_id) => (dispatch, getState) => {
+  const currentUserId = getState().session.id
+
+  ApiUtils.inviteUsers(user_ids, board_id).then(board => {
     dispatch({
-      type: UPDATE_MEMBERSHIP,
-      user_ids,
-      board_id
+      type: RECEIVE_BOARD,
+      board,
+      currentUserId
     })
-    return users
+    dispatch(getMembers(board.id))
+    return board
   })
+}
