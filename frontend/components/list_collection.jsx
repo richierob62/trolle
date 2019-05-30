@@ -5,9 +5,11 @@ import List from './list'
 import { createList } from '../actions/list_actions'
 import { moveCard } from '../actions/card_actions'
 import { DragDropContext } from 'react-beautiful-dnd'
+import ReactDOM from 'react-dom'
 
 const mstp = state => ({
-  lists: Object.values(state.entities.lists)
+  lists: Object.values(state.entities.lists),
+  cards: state.entities.cards
 })
 
 const mdtp = dispatch => ({
@@ -20,9 +22,12 @@ class ListCollection extends React.Component {
     super(props)
     this.onDragEnd = this.onDragEnd.bind(this)
     this.onDragStart = this.onDragStart.bind(this)
+    this.onDragUpdate = this.onDragUpdate.bind(this)
   }
 
-  onDragStart() {}
+  onDragStart(e) {}
+
+  onDragUpdate(e) {}
 
   onDragEnd(result) {
     const { destination, source, draggableId: card_id } = result
@@ -54,6 +59,7 @@ class ListCollection extends React.Component {
           <DragDropContext
             onDragStart={this.onDragStart}
             onDragEnd={this.onDragEnd}
+            onDragUpdate={this.onDragUpdate}
           >
             {lists.map(l => (
               <li className="list-item" key={l.id}>

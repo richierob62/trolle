@@ -24,8 +24,9 @@
     }
 
     &.is-dragging {
-      transform: rotate(10deg);
-      background: lightgreen;
+      // transform: rotate(10deg);
+      //   background: lightgreen;
+      // opacity: 0.2;
     }
   }
 }
