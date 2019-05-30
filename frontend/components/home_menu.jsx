@@ -6,7 +6,7 @@ import { setSelectedHomeMenuItem } from '../actions/ui_actions'
 
 const mstp = state => ({
   teams: Object.values(state.entities.teams),
-  selectedItem: state.ui.nav.home_menu,
+  selectedItem: state.ui.nav.home_menu || 'boards'
 })
 
 const mdtp = dispatch => ({
@@ -99,9 +99,6 @@ class HomeMenu extends React.Component {
               selectorFunc={this.handleItemSelect('team_' + team.id)}
             />
           ))}
-          <li>
-            <span>i</span>Create a team
-          </li>
         </ul>
       </nav>
     )
