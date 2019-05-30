@@ -6,7 +6,7 @@ import { setSelectedHomeMenuItem } from '../actions/ui_actions'
 
 const mstp = state => ({
   teams: Object.values(state.entities.teams),
-  selectedItem: state.ui.nav.home_menu
+  selectedItem: state.ui.nav.home_menu,
 })
 
 const mdtp = dispatch => ({
