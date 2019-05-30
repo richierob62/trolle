@@ -7,7 +7,7 @@
   height: 80px;
   width: 171px;
   font-weight: 700;
-  font-family: 'Arial';
+  // font-family: 'Arial';
   font-size: 14px;
   text-align: center;
   vertical-align: middle;
@@ -56,7 +56,7 @@
 
         .title {
           color: rgba(255, 255, 255, 0.6);
-          font-family: 'Arial';
+          // font-family: 'Arial';
           font-size: 18px;
           font-weight: bold;
           background: transparent;
@@ -70,7 +70,7 @@
           }
           &::placeholder {
             color: rgba(255, 255, 255, 0.6);
-            font-family: 'Arial';
+            // font-family: 'Arial';
             font-size: 18px;
             font-weight: bold;
           }
@@ -179,7 +179,7 @@
 
   .title {
     font-weight: bold;
-    font-family: 'Arial';
+    // font-family: 'Arial';
     font-size: 18px;
   }
 
@@ -203,7 +203,7 @@
 
       .thumb-title {
         font-weight: bold;
-        font-family: 'Arial';
+        // font-family: 'Arial';
         font-size: 18px;
         padding-left: 2px;
       }
@@ -274,7 +274,7 @@
     background-color: rgba(9, 30, 66, 0.08);
     display: flex;
     align-items: center;
-    font-family: 'Arial';
+    // font-family: 'Arial';
 
     span {
       margin-left: 4px;
@@ -351,7 +351,7 @@
         line-height: 32px;
         margin: 0 4px 0 0;
         padding: 2px 7px;
-        font-family: 'Arial';
+        // font-family: 'Arial';
         &:hover {
           background: rgba(0, 0, 0, 0.3);
         }
@@ -379,10 +379,10 @@
             line-height: 40px;
             margin: 0 12px;
             padding: 0 32px;
-            font-family: 'Share';
+            // font-family: 'Share';
             flex: 1;
             text-align: center;
-            font-size: 16px;
+            font-size: 14px;
           }
           .close {
             margin-right: 11px;
@@ -400,7 +400,7 @@
         .change-team,
         a {
           font-size: 15px;
-          font-family: 'Arial';
+          // font-family: 'Arial';
           font-weight: bold;
           padding: 4px 8px;
           cursor: pointer;
@@ -413,8 +413,8 @@
         }
         .part-of {
           color: #172b4d;
-          font-size: 15px;
-          font-family: 'Arial';
+          font-size: 14px;
+          // font-family: 'Arial';
           font-weight: bold;
           padding: 5px 13px;
         }
@@ -437,7 +437,7 @@
             box-shadow: 0 1px 0 0 #3f6f21;
             border: none;
             color: #fff;
-            font-family: 'Arial';
+            // font-family: 'Arial';
             font-size: 14px;
             font-weight: bold;
             padding: 1px 23px;
@@ -478,7 +478,7 @@
               line-height: 16px;
               margin-top: 16px;
               margin-bottom: 4px;
-              font-family: 'Arial';
+              // font-family: 'Arial';
             }
             input,
             textarea {
@@ -554,7 +554,7 @@
           font-size: 15px;
           line-height: 21px;
           font-weight: 400;
-          font-family: 'Arial';
+          // font-family: 'Arial';
           margin-bottom: 13px;
         }
       }
@@ -563,7 +563,7 @@
 }
 
 .visibility-dropdown.changer {
-  font-family: 'Arial';
+  // font-family: 'Arial';
   margin-left: 8px;
 
   .visibility-dropdown-top {
@@ -597,10 +597,10 @@
         line-height: 40px;
         margin: 0 12px;
         padding: 0 32px;
-        font-family: 'Share';
+        // font-family: 'Share';
         flex: 1;
         text-align: center;
-        font-size: 16px;
+        font-size: 14px;
       }
 
       .close {
@@ -625,7 +625,7 @@
     line-height: 32px;
     margin: 0 4px 0 0;
     padding: 2px 7px;
-    font-family: 'Arial';
+    // font-family: 'Arial';
     &:hover {
       background: rgba(0, 0, 0, 0.3);
     }
@@ -640,6 +640,7 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
+    z-index: 100;
 
     .top-row {
       display: flex;
@@ -651,10 +652,10 @@
         line-height: 40px;
         margin: 0 12px;
         padding: 0 32px;
-        font-family: 'Share';
+        // font-family: 'Share';
         flex: 1;
         text-align: center;
-        font-size: 16px;
+        font-size: 14px;
       }
       .close {
         margin-right: 11px;
@@ -755,7 +756,7 @@
         }
 
         span {
-          font-family: 'Arial';
+          // font-family: 'Arial';
           font-weight: bold;
           font-size: 15px;
         }

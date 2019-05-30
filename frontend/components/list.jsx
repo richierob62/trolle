@@ -69,7 +69,7 @@ class List extends React.Component {
           padding: '7px 6px',
           fontSize: '14px',
           fontWeight: 'bold',
-          fontFamily: 'Arial',
+          // fontFamily: 'Arial',
           alignSelf: 'stretch',
           marginLeft: '3px',
           marginTop: '3px',
@@ -83,7 +83,7 @@ class List extends React.Component {
           border: 'none',
           fontSize: '14px',
           fontWeight: 'bold',
-          fontFamily: 'Arial',
+          // fontFamily: 'Arial',
           padding: '10px'
         }
 
