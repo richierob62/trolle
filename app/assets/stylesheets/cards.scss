@@ -22,11 +22,42 @@
       color: #091e42;
       background-color: #f5f6f8;
     }
+  }
 
-    &.is-dragging {
-      // transform: rotate(10deg);
-      //   background: lightgreen;
-      // opacity: 0.2;
+  .dragged-card {
+    color: transparent;
+    // padding: 6px 8px;
+    // position: relative;
+    // z-index: 10;
+    // color: #172b4d;
+    // cursor: pointer;
+    // background-color: #fff;
+    // border-radius: 3px;
+    // box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+    // margin-bottom: 8px;
+    // min-height: 20px;
+    // word-wrap: break-word;
+    // font-size: 14px;
+    // line-height: 20px;
+    // font-weight: 400;
+    &:before {
+      content: attr(data-title);
+      width: 246px;
+      height: 20px;
+      padding: 6px 8px;
+      position: absolute;
+      color: #172b4d;
+      cursor: pointer;
+      background-color: #fff;
+      border-radius: 3px;
+      box-shadow: 0 5px 5px rgba(9, 30, 66, 0.55);
+      margin-bottom: 8px;
+      min-height: 20px;
+      word-wrap: break-word;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      transform: rotate(3deg);
     }
   }
 }
