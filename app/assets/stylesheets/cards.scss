@@ -22,5 +22,10 @@
       color: #091e42;
       background-color: #f5f6f8;
     }
+
+    &.is-dragging {
+      transform: rotate(10deg);
+      background: lightgreen;
+    }
   }
 }

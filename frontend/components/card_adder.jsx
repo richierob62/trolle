@@ -32,7 +32,7 @@ class CardAdder extends React.Component {
   handleCreate(e) {
     e.stopPropagation()
     const { title } = this.state
-    const { list } = this.props 
+    const { list } = this.props
     if (!title) return
     const newCard = { title }
     this.setState({
@@ -73,10 +73,9 @@ class CardAdder extends React.Component {
         className="add-form add-card-form"
         onKeyPress={this.checkKeyPressForEnter}
       >
-        <input
+        <textarea
           className="input-field"
           ref={this.input_node}
-          type="text"
           value={this.state.title}
           onChange={this.handleChange}
           placeholder="Enter a title for this card..."

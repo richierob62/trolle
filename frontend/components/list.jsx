@@ -6,6 +6,7 @@ import { createCard } from '../actions/card_actions'
 import { updateList } from '../actions/list_actions'
 import { getBoard } from '../actions/board_actions.js'
 import { merge } from 'lodash'
+import { Droppable } from 'react-beautiful-dnd'
 
 const mstp = (state, ownProps) => ({
   cards: Object.values(state.entities.cards).filter(
@@ -87,6 +88,7 @@ class List extends React.Component {
           padding: '10px'
         }
 
+    const sortedCards = cards.sort((a, b) => a.order - b.order)
     return (
       <div className="list-frame">
         <input
@@ -96,16 +98,26 @@ class List extends React.Component {
           className="list-title-input"
           onChange={this.handleTitleChange}
           value={listTitle}
+          // @ts-ignore
           style={titleFocusStyle}
           size={listTitle ? listTitle.length + 0 : 1}
         />
+        <Droppable droppableId={list.id}>
+          {provided => (
+            // @ts-ignore
+            <div
+              className="cards-holder"
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {sortedCards.map((c, index) => (
+                <Card key={c.id} card={c} index={index} />
+              ))}
 
-        <div className="cards-holder">
-          {cards.map(c => (
-            <Card key={c.id} card={c} />
-          ))}
-        </div>
-
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
         <CardAdder
           first={list.length === 0}
           list={list}

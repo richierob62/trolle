@@ -47,6 +47,7 @@
       padding: 8px 12px;
       font-size: 14px;
       font-weight: 400;
+      outline: none;
     }
 
     > div {
@@ -86,6 +87,15 @@
 
   .add-card-form {
     width: auto;
+
+    .input-field {
+      box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+      margin-left: -3px;
+      margin-right: -3px;
+      margin-bottom: 3px;
+      resize: none;
+      height: 57px;
+    }
   }
 
   .add-list-btn {

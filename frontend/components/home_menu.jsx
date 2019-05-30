@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { getTeams } from '../actions/team_actions'
 import { setSelectedHomeMenuItem } from '../actions/ui_actions'
 
@@ -59,6 +59,7 @@ const TeamMenuLink = ({ team, selectedItem, selectorFunc }) => (
 class HomeMenu extends React.Component {
   componentDidMount() {
     this.props.getTeams()
+    this.props.history.push(`/${this.props.selectedItem}`)
   }
 
   handleItemSelect(selection) {
@@ -108,4 +109,4 @@ class HomeMenu extends React.Component {
 export default connect(
   mstp,
   mdtp
-)(HomeMenu)
+)(withRouter(HomeMenu))
