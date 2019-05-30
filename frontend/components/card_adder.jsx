@@ -32,15 +32,14 @@ class CardAdder extends React.Component {
   handleCreate(e) {
     e.stopPropagation()
     const { title } = this.state
-    const { list } = this.props
+    const { list } = this.props 
     if (!title) return
-
     const newCard = { title }
-    this.props.createCard(newCard, list)
     this.setState({
       open: false,
       title: ''
     })
+    this.props.createCard(newCard, list)
   }
 
   componentDidMount() {

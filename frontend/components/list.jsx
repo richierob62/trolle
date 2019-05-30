@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Card from './card'
 import { createCard } from '../actions/card_actions'
 import { updateList } from '../actions/list_actions'
+import { getBoard } from '../actions/board_actions.js'
 import { merge } from 'lodash'
 
 const mstp = (state, ownProps) => ({
@@ -14,7 +15,8 @@ const mstp = (state, ownProps) => ({
 
 const mdtp = dispatch => ({
   createCard: (card, list) => dispatch(createCard(card, list)),
-  updateList: list => dispatch(updateList(list))
+  updateList: list => dispatch(updateList(list)),
+  getBoard: id => dispatch(getBoard(id))
 })
 
 class List extends React.Component {
@@ -25,6 +27,11 @@ class List extends React.Component {
       listTitle: this.props.list ? this.props.list.title : ''
     }
     this.handleTitleChange = this.handleTitleChange.bind(this)
+  }
+
+  componentDidMount() {
+    const board_id = this.props.list.board_id
+    this.props.getBoard(board_id)
   }
 
   handleTitleChange(e) {
