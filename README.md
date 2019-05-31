@@ -1,4 +1,4 @@
-# Trolle ( troh-lay )
+# Trolle <span style="font-size:small;">( troh-lay )</span>
 
 This is a clone of the popular task management web application, Trello. It allows users to create projects (boards), group tasks (lists), and create and arrange activities (cards). Additionally, users can keep their boards private, share them with teams they create, or make them public to the world.
 
