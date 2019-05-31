@@ -34,7 +34,7 @@ class LoginSignupForm extends React.Component {
         password
       }
       this.props.clearErrors()
-      this.props.action(user).then(u => this.props.history.push('/'))
+      this.props.action(user).then(u => this.props.history.push('/boards'))
     }
   }
 

@@ -27,7 +27,9 @@ export const signup = user => dispatch =>
   APIUtil.signup(user).then(
     user => {
       dispatch(receiveCurrentUser(user))
-      return user
+      return setTimeout(() => {
+        return user
+      }, 150)
     },
     err => dispatch(receiveErrors(err.responseJSON))
   )
@@ -36,7 +38,9 @@ export const login = user => dispatch =>
   APIUtil.login(user).then(
     user => {
       dispatch(receiveCurrentUser(user))
-      return user
+      return setTimeout(() => {
+        return user
+      }, 150)
     },
     err => dispatch(receiveErrors(err.responseJSON))
   )
