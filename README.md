@@ -2,7 +2,7 @@
 
 This is a clone of the popular task management web application, Trello. It allows users to create projects (boards), group tasks (lists), and create and arrange activities (cards). Additionally, users can keep their boards private, share them with teams they create, or make them public to the world.
 
-Trolle was created as a demonstation of my skills set and is not intended for commercial use or in any manner that would compete with Trello.
+Trolle was created as a demonstation of my skills set.
 
 ---
 
