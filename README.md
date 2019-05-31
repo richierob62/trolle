@@ -6,6 +6,8 @@ Trolle was created as a demonstation of my skills set.
 
 ---
 
+![](trolle.gif)
+
 ## The Live Site
 
 Trolle is hosted on heroku <a href="https://trolle-app.herokuapp.com/" target="_blank">here</a>. Sign up and take it for a spin.
