@@ -53,9 +53,9 @@ If you wish to download and run it locally:
 
 ## Of Interest
 
-One problem I faced came with the decision to use an open source library to handle drag and drop. <a href="https://babeljs.io/" target="_blank">react-beautiful-dnd</a> is a very popular library for this purpose, but its need to restrict the use of the CSS styling property `transform: rotate( 10deg )` as a core part of its strategy made it impossible to just add a class or style to the component when it was being dragged. The solution lay in React's ability to conditionally render based on state change:
+One problem I faced came with the decision to use an open source library to handle drag and drop. <a href="https://babeljs.io/" target="_blank">react-beautiful-dnd</a> is a very popular library for this purpose, but its need to restrict the use of the CSS styling property `transform: rotate( 10deg )` as a core part of its strategy made it impossible to just add a class or style to the component when it was being dragged. The solution lay in React's ability to conditionally render based on state change and a little bit of CSS:
 
-```
+```javascript
         <Draggable draggableId={card.id} index={index}>
           {(provided, snapshot) => {
             if (snapshot.isDragging) {
@@ -84,6 +84,31 @@ One problem I faced came with the decision to use an open source library to hand
             )
           }}
         </Draggable>
+```
+
+```css
+  .dragged-card {
+    color: transparent;
+    &:before {
+      content: attr(data-title);
+      width: 246px;
+      height: 20px;
+      padding: 6px 8px;
+      position: absolute;
+      color: #172b4d;
+      cursor: pointer;
+      background-color: #fff;
+      border-radius: 3px;
+      box-shadow: 0 5px 5px rgba(9, 30, 66, 0.55);
+      margin-bottom: 8px;
+      min-height: 20px;
+      word-wrap: break-word;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      transform: rotate(3deg);
+    }
+  }
 ```
 
 ---
