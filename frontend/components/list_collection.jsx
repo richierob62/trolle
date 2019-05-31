@@ -3,18 +3,23 @@ import { connect } from 'react-redux'
 import ListAdder from './list_adder'
 import List from './list'
 import { createList } from '../actions/list_actions'
+import { getBoard } from '../actions/board_actions'
 import { moveCard } from '../actions/card_actions'
 import { DragDropContext } from 'react-beautiful-dnd'
-import ReactDOM from 'react-dom'
 
-const mstp = state => ({
-  lists: Object.values(state.entities.lists),
-  cards: state.entities.cards
-})
+const mstp = (state, { board }) => {
+  return {
+    lists: Object.values(state.entities.lists).filter(
+      l => l.board_id === board.id
+    ),
+    cards: state.entities.cards
+  }
+}
 
 const mdtp = dispatch => ({
   createList: (list, board) => dispatch(createList(list, board)),
-  moveCard: moveData => dispatch(moveCard(moveData))
+  moveCard: moveData => dispatch(moveCard(moveData)),
+  getBoard: id => dispatch(getBoard(id))
 })
 
 class ListCollection extends React.Component {
@@ -23,6 +28,10 @@ class ListCollection extends React.Component {
     this.onDragEnd = this.onDragEnd.bind(this)
     this.onDragStart = this.onDragStart.bind(this)
     this.onDragUpdate = this.onDragUpdate.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.getBoard(this.props.board.id)
   }
 
   onDragStart(e) {}
@@ -52,7 +61,6 @@ class ListCollection extends React.Component {
 
   render() {
     const { lists, createList, board } = this.props
-
     return (
       <div className="list-holder">
         <ul>
