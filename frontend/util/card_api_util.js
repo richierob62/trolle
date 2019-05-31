@@ -11,3 +11,10 @@ export const moveCard = data =>
     url: `/api/cards/${data.card_id}/move`,
     data: { data }
   })
+
+export const updateCard = card =>
+  $.ajax({
+    method: 'PATCH',
+    url: `/api/cards/${card.id}`,
+    data: { card }
+  })

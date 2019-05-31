@@ -64,6 +64,13 @@ class Api::CardsController < ApplicationController
     render "api/boards/show.json.jbuilder"
   end
 
+  def update
+    @card = Card.find(params[:card][:id])
+    @card.title = params[:card][:title]
+    @card.save
+    render :show
+  end
+
   private
 
   def card_params

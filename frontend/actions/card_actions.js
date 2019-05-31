@@ -4,6 +4,7 @@ import * as APIUtil from '../util/card_api_util'
 
 import { RECEIVE_BOARD, RECEIVE_VALIDATION_ERRORS } from './board_actions'
 import { RECEIVE_LISTS } from './list_actions'
+import { END_CARD_EDIT } from './ui_actions'
 
 export const RECEIVE_CARDS = 'RECEIVE_CARDS'
 export const RECEIVE_CARD = 'RECEIVE_CARD'
@@ -71,3 +72,25 @@ export const moveCard = data => (dispatch, getState) => {
       })
   )
 }
+
+export const updateCard = card => (dispatch, getState) => {
+  const currentUserId = getState().session.ider
+  return APIUtil.updateCard(card).then(
+    card => {
+      dispatch({
+        type: RECEIVE_CARD,
+        card
+      })
+      dispatch({
+        type: END_CARD_EDIT
+      })
+      return card
+    },
+    errors =>
+      dispatch({
+        type: RECEIVE_VALIDATION_ERRORS,
+        errors
+      })
+  )
+}
+

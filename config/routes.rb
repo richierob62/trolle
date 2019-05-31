@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :lists, only: [:update] do
       resources :cards, only: [:create]
     end
-    resources :cards, only: [] do
+    resources :cards, only: [:update] do
       member do
         post "move"
       end
