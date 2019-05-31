@@ -79,6 +79,11 @@
 }
 
 .editing-card {
+  background: #0000004d;
+  padding: 1000px;
+  margin: -1000px;
+  z-index: 10000;
+
   form {
     display: flex;
     flex-direction: column;
