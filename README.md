@@ -49,7 +49,7 @@ If you wish to download and run it locally:
 
 ---
 
-## Challenges
+## Of Interest
 
 One problem I faced came with the decision to use an open source library to handle drag and drop. <a href="https://babeljs.io/" target="_blank">react-beautiful-dnd</a> is a very popular library for this purpose, but its need to restrict the use of the CSS styling property `transform: rotate( 10deg )` as a core part of its strategy made it impossible to just add a class or style to the component when it was being dragged. The solution lay in React's ability to conditionally render based on state change:
 
